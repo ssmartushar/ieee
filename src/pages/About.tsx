@@ -182,9 +182,9 @@ const About: React.FC = () => {
               ))}
             </div>
         </div>
-    </section>
+    </section>*/}
     </div>
   );
 };
-*/}
+
 export default About;
