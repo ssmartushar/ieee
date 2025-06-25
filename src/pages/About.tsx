@@ -155,7 +155,7 @@ const About: React.FC = () => {
         </div>
       </section>
 
-      {/* Projects Gallery Section */}
+      {/* Projects Gallery Section 
       <section className="py-20 px-4 relative z-10">
         <div className="max-w-7xl mx-auto glass-card bg-transparent-black p-8 md:p-12 rounded-3xl">
             <h2 className="text-5xl font-bold text-center mb-12 animate-glow">
@@ -186,5 +186,5 @@ const About: React.FC = () => {
     </div>
   );
 };
-
+*/}
 export default About;
