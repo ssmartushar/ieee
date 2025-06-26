@@ -92,7 +92,7 @@ const Members: React.FC = () => {
     {
       name: 'Shreyash Bahe',
       position: 'Co-Webmaster',
-      image: '/assets/shreyash_bahe.jpg',
+      image: '/assets/shreyash_bahe.jpeg',
       bio: 'Dedicated developer supporting the chapter\'s website and digital infrastructure.',
       achievements: ['Assisted in front-end development', 'Managed content updates', 'Troubleshot technical issues'],
       experience: '2+ years in web development',
