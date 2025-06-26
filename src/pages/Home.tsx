@@ -53,10 +53,14 @@ const Home: React.FC = () => {
     setIsModalOpen(true);
   };
 
+  const handleVolunteerClick = () => {
+    window.open('https://forms.gle/VBtg6USrhRX9dRiY6', '_blank');
+  };
+
   const PrivacyPolicyContent = () => (
     <>
       <h3 className="text-xl font-bold mt-4">1. Information we collect</h3>
-      <p>We only ask for personal information when we truly need it to provide a service to you. We collect it by fair and lawful means, with your knowledge and consent. We also let you know why we’re collecting it and how it will be used.</p>
+      <p>We only ask for personal information when we truly need it to provide a service to you. We collect it by fair and lawful means, with your knowledge and consent. We also let you know why we're collecting it and how it will be used.</p>
       <h3 className="text-xl font-bold mt-4">2. How we use your information</h3>
       <p>We use the information we collect in various ways, including to provide, operate, and maintain our website, improve, personalize, and expand our website, and understand and analyze how you use our website.</p>
     </>
@@ -218,6 +222,7 @@ const Home: React.FC = () => {
                   transition={{ duration: 0.5, delay: 2 }}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
+                  onClick={handleVolunteerClick}
                   className="neon-button"
                 >
                   Call for Volunteers <Rocket className="inline-block ml-2" size={20} />
