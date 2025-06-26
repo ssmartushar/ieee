@@ -86,11 +86,11 @@ const Cygnus: React.FC = () => {
                 CYGNUS
               </h1>
             </div>
-            <p className="text-2xl md:text-3xl text-red-200 mb-4">
+            <p className="text-2xl md:text-3xl text-yellow-200 mb-4">
             Cygnus- a tech saga across the stars
             </p>
             <p className="text-lg text-white/70 max-w-3xl mx-auto mb-12">
-            “In a galaxy not so far away, a signal has echoed across the stars... CYGNUS has returned.”
+            "In a galaxy not so far away, a signal has echoed across the stars... CYGNUS has returned."
             </p>
 
             {/* Countdown Timer */}
@@ -118,7 +118,7 @@ const Cygnus: React.FC = () => {
             </div>
 
             <motion.button
-              className="bg-gradient-to-r from-red-600 to-red-800 hover:from-red-500 hover:to-red-700 text-white font-bold py-4 px-8 rounded-full border-2 border-red-400 shadow-lg transition-all duration-300 text-lg inline-flex items-center"
+              className="bg-gradient-to-r from-yellow-600 to-yellow-800 hover:from-yellow-500 hover:to-yellow-700 text-black font-bold py-4 px-8 rounded-full border-2 border-yellow-400 shadow-lg transition-all duration-300 text-lg inline-flex items-center"
             >
               Join the Rebellion
               <ExternalLink className="ml-2 w-5 h-5" />
@@ -159,8 +159,8 @@ const Cygnus: React.FC = () => {
               className="bg-black/20 rounded-lg p-6"
             >
               <div className="flex items-center mb-4">
-                <div className="p-2 bg-red-500/20 rounded-full mr-4">
-                  <Brain className="w-6 h-6 text-red-400" />
+                <div className="p-2 bg-yellow-500/20 rounded-full mr-4">
+                  <Brain className="w-6 h-6 text-yellow-400" />
                 </div>
                 <h3 className="text-2xl font-bold text-white">What is Cygnus?</h3>
               </div>
@@ -178,8 +178,8 @@ const Cygnus: React.FC = () => {
               className="bg-black/20 rounded-lg p-6"
             >
               <div className="flex items-center mb-4">
-                <div className="p-2 bg-red-500/20 rounded-full mr-4">
-                  <Star className="w-6 h-6 text-red-400" />
+                <div className="p-2 bg-yellow-500/20 rounded-full mr-4">
+                  <Star className="w-6 h-6 text-yellow-400" />
                 </div>
                 <h3 className="text-2xl font-bold text-white">Why Be a Part of It?</h3>
               </div>
@@ -197,8 +197,8 @@ const Cygnus: React.FC = () => {
               className="bg-black/20 rounded-lg p-6"
             >
               <div className="flex items-center mb-4">
-                <div className="p-2 bg-red-500/20 rounded-full mr-4">
-                  <Users className="w-6 h-6 text-red-400" />
+                <div className="p-2 bg-yellow-500/20 rounded-full mr-4">
+                  <Users className="w-6 h-6 text-yellow-400" />
                 </div>
                 <h3 className="text-2xl font-bold text-white">Who Can Join?</h3>
               </div>
@@ -216,8 +216,8 @@ const Cygnus: React.FC = () => {
               className="bg-black/20 rounded-lg p-6"
             >
               <div className="flex items-center mb-4">
-                <div className="p-2 bg-red-500/20 rounded-full mr-4">
-                  <Zap className="w-6 h-6 text-red-400" />
+                <div className="p-2 bg-yellow-500/20 rounded-full mr-4">
+                  <Zap className="w-6 h-6 text-yellow-400" />
                 </div>
                 <h3 className="text-2xl font-bold text-white">What to Expect?</h3>
               </div>
@@ -242,7 +242,7 @@ const Cygnus: React.FC = () => {
             Past Event Glimpses
           </motion.h2>
 
-          <div className="relative w-full max-w-4xl mx-auto h-96 overflow-hidden rounded-2xl border-2 border-red-400/30">
+          <div className="relative w-full max-w-4xl mx-auto h-96 overflow-hidden rounded-2xl border-2 border-yellow-400/30">
             <AnimatePresence>
               <motion.img
                 key={currentImageIndex}
@@ -262,7 +262,7 @@ const Cygnus: React.FC = () => {
 
 
       {/* Event Info Section */}
-      <section className="relative z-10 py-20 px-4 bg-gradient-to-br from-red-900/20 to-black/50 backdrop-blur-sm">
+      <section className="relative z-10 py-20 px-4 bg-gradient-to-br from-yellow-900/20 to-black/50 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <motion.div
@@ -273,7 +273,7 @@ const Cygnus: React.FC = () => {
               className="text-center group"
             >
               <div className="relative">
-                <MapPin className="w-12 h-12 text-red-400 mx-auto mb-4" />
+                <MapPin className="w-12 h-12 text-yellow-400 mx-auto mb-4" />
                 <Star className="w-6 h-6 text-white/30 fill-current absolute -top-2 -right-2 transition-colors" />
               </div>
               <h3 className="text-xl font-bold text-white mb-2">Cosmic Venue</h3>
@@ -291,7 +291,7 @@ const Cygnus: React.FC = () => {
               className="text-center group"
             >
               <div className="relative">
-                <Users className="w-12 h-12 text-red-400 mx-auto mb-4" />
+                <Users className="w-12 h-12 text-yellow-400 mx-auto mb-4" />
                 <Star className="w-6 h-6 text-white/30 fill-current absolute -top-2 -right-2 transition-colors" />
               </div>
               <h3 className="text-xl font-bold text-white mb-2">Star Navigators</h3>
@@ -309,7 +309,7 @@ const Cygnus: React.FC = () => {
               className="text-center group"
             >
               <div className="relative">
-                <Trophy className="w-12 h-12 text-red-400 mx-auto mb-4" />
+                <Trophy className="w-12 h-12 text-yellow-400 mx-auto mb-4" />
                 <Star className="w-6 h-6 text-white/30 fill-current absolute -top-2 -right-2 transition-colors" />
               </div>
               <h3 className="text-xl font-bold text-white mb-2">Galactic Rewards</h3>

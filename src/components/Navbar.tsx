@@ -8,11 +8,10 @@ const Navbar: React.FC = () => {
 
   const navItems = [
     { path: '/', label: 'Home' },
+    { path: '/cygnus', label: 'Cygnus', isSpecial: true },
     { path: '/about', label: 'About' },
     { path: '/members', label: 'Members' },
-    /*{ path: '/events', label: 'Events' },*/
-    { path: '/cygnus', label: 'Cygnus' },
-   
+    /*{ path: '/events', label: 'Events' },*/,
   ];
 
   return (
@@ -24,16 +23,18 @@ const Navbar: React.FC = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
               <Link
                 key={item.path}
                 to={item.path}
                 className={`${
-                  location.pathname === item.path
-                    ? 'text-[#ffd300]'
-                    : 'text-[#f2f3f4] hover:text-[#ffd300]'
-                } transition-colors duration-300`}
+                  item.isSpecial
+                    ? 'bg-gradient-to-r from-[#ffd300] to-[#ff8c00] text-[#191919] px-4 py-2 rounded-full font-semibold shadow-lg hover:shadow-[#ffd300]/30 hover:scale-105 transition-all duration-300'
+                    : location.pathname === item.path
+                    ? 'text-[#ffd300] py-2'
+                    : 'text-[#f2f3f4] hover:text-[#ffd300] py-2'
+                } transition-all duration-300`}
               >
                 {item.label}
               </Link>
@@ -61,10 +62,12 @@ const Navbar: React.FC = () => {
                 key={item.path}
                 to={item.path}
                 className={`${
-                  location.pathname === item.path
+                  item.isSpecial
+                    ? 'bg-gradient-to-r from-[#ffd300] to-[#ff8c00] text-[#191919] mx-2 px-4 py-2 rounded-full font-semibold text-center block'
+                    : location.pathname === item.path
                     ? 'text-[#ffd300]'
                     : 'text-[#f2f3f4] hover:text-[#ffd300]'
-                } block px-3 py-2 text-base`}
+                } ${!item.isSpecial ? 'block px-3 py-2 text-base' : 'text-base'} transition-all duration-300`}
                 onClick={() => setIsOpen(false)}
               >
                 {item.label}
