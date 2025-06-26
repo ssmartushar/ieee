@@ -32,7 +32,7 @@ const Members: React.FC = () => {
     {
       name: 'Rutuj Langde',
       position: 'Secretary',
-      image: '/assets/Rutuj Langde.jpg',
+      image: '/assets/rutuj.png',
       bio: 'Organized and efficient, ensuring the smooth operation of all chapter activities.',
       achievements: ['Streamlined communication channels', 'Managed event logistics', 'Maintained chapter records'],
       experience: '3+ years in administration',
@@ -42,7 +42,7 @@ const Members: React.FC = () => {
     {
       name: 'Vaibhavi Mangrulkar',
       position: 'Vice Chair',
-      image: '/assets/Vaibhavi Mangrulkar.jpg',
+      image: '/assets/vaibhavi.jpg',
       bio: 'Dynamic and supportive, assisting the Chair and driving member engagement.',
       achievements: ['Led successful recruitment drives', 'Organized member workshops', 'Enhanced team collaboration'],
       experience: '3+ years in leadership',
@@ -262,7 +262,7 @@ const Members: React.FC = () => {
     {
       name: 'Sai Rahangdale',
       position: 'Execom',
-      image: '/assets/Sai Rahangdale.jpg',
+      image: '/assets/sai.jpg',
       bio: 'Dedicated member of the executive committee, contributing to the chapter\'s success.',
       achievements: ['Supported various initiatives', 'Volunteered at key events', 'Active in chapter meetings'],
       experience: '1+ year in committee roles',

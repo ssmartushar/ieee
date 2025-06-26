@@ -20,6 +20,7 @@ interface CygnusEvent {
 }
 
 const Cygnus: React.FC = () => {
+  const [showPopup, setShowPopup] = useState(false);
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -70,7 +71,44 @@ const Cygnus: React.FC = () => {
 
   return (
     <div className="pt-8 sm:pt-16 min-h-screen bg-black overflow-x-hidden">
-
+      <AnimatePresence>
+        {showPopup && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 px-4"
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              className="bg-[#191919] border border-[#ffd300]/50 rounded-lg p-6 sm:p-8 text-center shadow-2xl shadow-[#ffd300]/20 max-w-sm w-full"
+            >
+              <h3 className="text-xl sm:text-2xl font-bold text-[#ffd300] mb-4">Coming Soon!</h3>
+              <p className="text-white/80 mb-6 text-sm sm:text-base">Registration will open shortly. Stay tuned, rebel!</p>
+              <button
+                onClick={() => setShowPopup(false)}
+                className="bg-gradient-to-r from-[#ffd300] to-[#ff8c00] text-[#191919] px-6 py-2 rounded-full font-semibold shadow-lg hover:shadow-[#ffd300]/30 hover:scale-105 transition-all duration-300"
+              >
+                Got It
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="mt-8 sm:mt-16 px-4"
+            >
+              <img 
+                src="/assets/unnamed.png" 
+                alt="Cygnus Rebellion" 
+                className="rounded-2xl shadow-2xl mx-auto w-full max-w-4xl h-auto" 
+              />
+            </motion.div>
       {/* Hero Section */}
       <section className="relative z-10 py-10 sm:py-20 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto text-center">
@@ -116,24 +154,14 @@ const Cygnus: React.FC = () => {
             </div>
 
             <motion.button
+              onClick={() => setShowPopup(true)}
               className="bg-gradient-to-r from-yellow-600 to-yellow-800 hover:from-yellow-500 hover:to-yellow-700 text-black font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-full border-2 border-yellow-400 shadow-lg transition-all duration-300 text-base sm:text-lg inline-flex items-center mx-4"
             >
               Join the Rebellion
               <ExternalLink className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
             </motion.button>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="mt-8 sm:mt-16 px-4"
-            >
-              <img 
-                src="/assets/unnamed.png" 
-                alt="Cygnus Rebellion" 
-                className="rounded-2xl shadow-2xl mx-auto w-full max-w-4xl h-auto" 
-              />
-            </motion.div>
+
           </motion.div>
         </div>
       </section>
