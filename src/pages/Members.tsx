@@ -50,6 +50,26 @@ const Members: React.FC = () => {
       social: { linkedin: '#', email: '#' }
     },
     {
+      name: 'Shivansh Verma',
+      position: 'Webmaster',
+      image: '/assets/Shivansh Verma..jpg',
+      bio: 'The architect of our digital presence, building and maintaining our online platform.',
+      achievements: ['Redesigned chapter website', 'Implemented new features', 'Ensured website security and performance'],
+      experience: '2+ years in web development',
+      joinDate: 'Member since 2023',
+      social: { linkedin: '#', email: '#' }
+    },
+    {
+      name: 'Shreyash Bahe',
+      position: 'Co-Webmaster',
+      image: '/assets/shreyash_bahe.jpeg',
+      bio: 'Dedicated developer supporting the chapter\'s website and digital infrastructure.',
+      achievements: ['Assisted in front-end development', 'Managed content updates', 'Troubleshot technical issues'],
+      experience: '2+ years in web development',
+      joinDate: 'Member since 2023',
+      social: { linkedin: '#', email: '#' }
+    },
+    {
       name: 'Vibhor Joshi',
       position: 'Event Coordinator',
       image: '/assets/Vibhor_Joshi.jpg',
@@ -79,26 +99,7 @@ const Members: React.FC = () => {
       joinDate: 'Member since 2022',
       social: { linkedin: '#', email: '#' }
     },
-    {
-      name: 'Shivansh Verma',
-      position: 'Webmaster',
-      image: '/assets/Shivansh Verma..jpg',
-      bio: 'The architect of our digital presence, building and maintaining our online platform.',
-      achievements: ['Redesigned chapter website', 'Implemented new features', 'Ensured website security and performance'],
-      experience: '2+ years in web development',
-      joinDate: 'Member since 2023',
-      social: { linkedin: '#', email: '#' }
-    },
-    {
-      name: 'Shreyash Bahe',
-      position: 'Co-Webmaster',
-      image: '/assets/shreyash_bahe.jpeg',
-      bio: 'Dedicated developer supporting the chapter\'s website and digital infrastructure.',
-      achievements: ['Assisted in front-end development', 'Managed content updates', 'Troubleshot technical issues'],
-      experience: '2+ years in web development',
-      joinDate: 'Member since 2023',
-      social: { linkedin: '#', email: '#' }
-    },
+    
     {
       name: 'Priyanshu Mishra',
       position: 'Publicity Lead',
