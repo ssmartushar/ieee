@@ -99,6 +99,16 @@ const Members: React.FC = () => {
       joinDate: 'Member since 2022',
       social: { linkedin: '#', email: '#' }
     },
+    {
+      name: 'Shravani Satarkar',
+      position: 'Co-Treasurer',
+      image: '/assets/Shravani Satarkar.png',
+      bio: 'Detail-oriented manager of the chapter\'s finances, ensuring fiscal responsibility.',
+      achievements: ['Managed budget for all events', 'Secured sponsorships', 'Provided transparent financial reporting'],
+      experience: '1+ years in finance',
+      joinDate: 'Member since 2023',
+      social: { linkedin: '#', email: '#' }
+    },
     
     {
       name: 'Priyanshu Mishra',
