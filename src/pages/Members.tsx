@@ -151,7 +151,7 @@ const Members: React.FC = () => {
       social: { linkedin: '#', email: '#' }
     },
     {
-      name: 'Ritunash Singh',
+      name: 'Ritanshu Singh',
       position: 'Co-Coordination Lead',
       image: '/assets/qaz.jpg',
       bio: 'Proactive coordinator assisting in the smooth operation of chapter projects.',
