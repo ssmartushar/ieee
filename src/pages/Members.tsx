@@ -27,7 +27,7 @@ const Members: React.FC = () => {
       achievements: ['Spearheaded major tech initiatives', 'Fostered industry collaborations', 'Mentored student projects'],
       experience: '4+ years in leadership',
       joinDate: 'Member since 2021',
-      social: { linkedin: '#', email: '#' }
+      social: { linkedin: 'https://www.linkedin.com/in/bharat-jambhulkar-b63a62285', email: 'bharatjambhulkar358@gmail.com' }
     },
     {
       name: 'Rutuj Langde',
@@ -37,7 +37,7 @@ const Members: React.FC = () => {
       achievements: ['Streamlined communication channels', 'Managed event logistics', 'Maintained chapter records'],
       experience: '3+ years in administration',
       joinDate: 'Member since 2022',
-      social: { linkedin: '#', email: '#' }
+      social: { linkedin: 'https://www.linkedin.com/in/rutuj-langde-a79821258/', email: 'rutuj.langde.ai@ghrce.raisoni.net' }
     },
     {
       name: 'Vaibhavi Mangrulkar',
@@ -47,7 +47,7 @@ const Members: React.FC = () => {
       achievements: ['Led successful recruitment drives', 'Organized member workshops', 'Enhanced team collaboration'],
       experience: '3+ years in leadership',
       joinDate: 'Member since 2022',
-      social: { linkedin: '#', email: '#' }
+      social: { linkedin: 'https://www.linkedin.com/in/vaibhavi-mangrulkar-7b0793285/', email: 'vaibhavimangrulkar00@gmail.com' }
     },
     {
       name: 'Shivansh Verma',
@@ -57,7 +57,7 @@ const Members: React.FC = () => {
       achievements: ['Redesigned chapter website', 'Implemented new features', 'Ensured website security and performance'],
       experience: '2+ years in web development',
       joinDate: 'Member since 2023',
-      social: { linkedin: '#', email: '#' }
+      social: { linkedin: 'https://www.linkedin.com/in/shivansh-verma-751850298/', email: 'shivansh1411@gmail.com' }
     },
     {
       name: 'Shreyash Bahe',
@@ -67,7 +67,7 @@ const Members: React.FC = () => {
       achievements: ['Assisted in front-end development', 'Managed content updates', 'Troubleshot technical issues'],
       experience: '2+ years in web development',
       joinDate: 'Member since 2023',
-      social: { linkedin: '#', email: '#' }
+      social: { linkedin: 'https://www.linkedin.com/in/shreyash-bahe-5b1b2b298/', email: 'shreyashbahe12@gmail.com' }
     },
     {
       name: 'Vibhor Joshi',
@@ -77,7 +77,7 @@ const Members: React.FC = () => {
       achievements: ['Managed flagship annual symposium', 'Introduced innovative event formats', 'Secured key speakers'],
       experience: '2+ years in event management',
       joinDate: 'Member since 2022',
-      social: { linkedin: '#', email: '#' }
+      social: { linkedin: 'https://www.linkedin.com/in/vibhor-joshi-7b0793285/', email: 'jvibhor74@gmail.com' }
     },
     {
       name: 'Yug Agarwal',
@@ -87,7 +87,7 @@ const Members: React.FC = () => {
       achievements: ['Assisted in workshop logistics', 'Managed volunteer teams', 'Contributed to event marketing'],
       experience: '2+ years in event support',
       joinDate: 'Member since 2022',
-      social: { linkedin: '#', email: '#' }
+      social: { linkedin: 'https://www.linkedin.com/in/yugagrawal1234?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app', email: 'yug122812@gmail.com' }
     },
     {
       name: 'Abhijeet Moghe',
@@ -97,16 +97,6 @@ const Members: React.FC = () => {
       achievements: ['Managed budget for all events', 'Secured sponsorships', 'Provided transparent financial reporting'],
       experience: '2+ years in finance',
       joinDate: 'Member since 2022',
-      social: { linkedin: '#', email: '#' }
-    },
-    {
-      name: 'Shravani Satarkar',
-      position: 'Co-Treasurer',
-      image: '/assets/Shravani Satarkar.png',
-      bio: 'Detail-oriented manager of the chapter\'s finances, ensuring fiscal responsibility.',
-      achievements: ['Managed budget for all events', 'Secured sponsorships', 'Provided transparent financial reporting'],
-      experience: '1+ years in finance',
-      joinDate: 'Member since 2023',
       social: { linkedin: '#', email: '#' }
     },
     
@@ -148,7 +138,7 @@ const Members: React.FC = () => {
       achievements: ['Created social media graphics', 'Assisted in video production', 'Contributed to UI/UX design'],
       experience: '2+ years in graphic design',
       joinDate: 'Member since 2023',
-      social: { linkedin: '#', email: '#' }
+      social: { linkedin: 'https://www.linkedin.com/in/prince-rayamwar-47b49428a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app', email: '' }
     },
     {
       name: 'Palash Shende',
@@ -168,7 +158,7 @@ const Members: React.FC = () => {
       achievements: ['Supported team meetings', 'Tracked action items', 'Assisted in resource allocation'],
       experience: '1+ year in coordination',
       joinDate: 'Member since 2023',
-      social: { linkedin: '#', email: '#' }
+      social: { linkedin: 'linkedIn.com/in/vibhorjoshi', email: 'jvibhor74@gmail.com' }
     },
     {
       name: 'Ridhima Shukla',
@@ -188,7 +178,7 @@ const Members: React.FC = () => {
       achievements: ['Crafted engaging posts', 'Monitored social trends', 'Interacted with our online community'],
       experience: '1+ year in social media',
       joinDate: 'Member since 2023',
-      social: { linkedin: '#', email: '#' }
+      social: { linkedin: 'https://www.linkedin.com/in/sshikha-tiwarii', email: '#' }
     },
     {
       name: 'Riya Yadav',
@@ -198,7 +188,7 @@ const Members: React.FC = () => {
       achievements: ['Authored key articles', 'Managed editorial calendar', 'Ensured brand voice consistency'],
       experience: '2+ years in content creation',
       joinDate: 'Member since 2022',
-      social: { linkedin: '#', email: '#' }
+      social: { linkedin: 'https://www.linkedin.com/in/yadav-riya14', email: '#' }
     },
     {
       name: 'Pranav Kharat',
@@ -208,11 +198,11 @@ const Members: React.FC = () => {
       achievements: ['Produced event highlight reels', 'Created promotional videos', 'Managed video equipment'],
       experience: '3+ years in videography',
       joinDate: 'Member since 2022',
-      social: { linkedin: '#', email: '#' }
+      social: { linkedin: 'https://www.linkedin.com/in/pranav-kharat-bbb7ab23b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app', email: 'pranavkharat146@gmail.com' }
     },
     {
       name: 'Navinya Yede',
-      position: 'Resource and Development Lead',
+      position: 'Research and Development Lead',
       image: '/assets/Navinya Yede.jpg',
       bio: 'Connecting our members with valuable resources and opportunities for growth.',
       achievements: ['Secured partnerships for workshops', 'Developed a mentorship program', 'Curated learning materials'],
@@ -228,7 +218,7 @@ const Members: React.FC = () => {
       achievements: ['Supported various initiatives', 'Volunteered at key events', 'Active in chapter meetings'],
       experience: '1+ year in committee roles',
       joinDate: 'Member since 2023',
-      social: { linkedin: '#', email: '#' }
+      social: { linkedin: 'www.linkedin.com/in/anjali-bopche-a1a454290', email: 'anjalibopche07@gmail.com' }
     },
     {
       name: 'Neha Kathole',
@@ -238,7 +228,7 @@ const Members: React.FC = () => {
       achievements: ['Supported various initiatives', 'Volunteered at key events', 'Active in chapter meetings'],
       experience: '1+ year in committee roles',
       joinDate: 'Member since 2023',
-      social: { linkedin: '#', email: '#' }
+      social: { linkedin: '', email: '#' }
     },
     {
       name: 'Janvi Chichudde',
@@ -268,7 +258,7 @@ const Members: React.FC = () => {
       achievements: ['Supported various initiatives', 'Volunteered at key events', 'Active in chapter meetings'],
       experience: '1+ year in committee roles',
       joinDate: 'Member since 2023',
-      social: { linkedin: '#', email: '#' }
+      social: { linkedin: 'https://www.linkedin.com/in/tushar-funde-a25366292?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app', email: '' }
     },
     {
       name: 'Sai Rahangdale',
