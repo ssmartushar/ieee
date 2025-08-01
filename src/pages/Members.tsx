@@ -77,7 +77,7 @@ const Members: React.FC = () => {
       achievements: ['Managed flagship annual symposium', 'Introduced innovative event formats', 'Secured key speakers'],
       experience: '2+ years in event management',
       joinDate: 'Member since 2022',
-      social: { linkedin: 'https://www.linkedin.com/in/vibhor-joshi-7b0793285/', email: 'jvibhor74@gmail.com' }
+      social: { linkedin: 'linkedIn.com/in/vibhorjoshi', email: 'jvibhor74@gmail.com' }
     },
     {
       name: 'Yug Agarwal',
@@ -158,7 +158,7 @@ const Members: React.FC = () => {
       achievements: ['Supported team meetings', 'Tracked action items', 'Assisted in resource allocation'],
       experience: '1+ year in coordination',
       joinDate: 'Member since 2023',
-      social: { linkedin: 'linkedIn.com/in/vibhorjoshi', email: 'jvibhor74@gmail.com' }
+      social: { linkedin: 'https://www.linkedin.com/in/ritanshu-singh-9428b1366', email: 'ritanshu1411@gmail.com' }
     },
     {
       name: 'Ridhima Shukla',
@@ -203,7 +203,7 @@ const Members: React.FC = () => {
     {
       name: 'Navinya Yede',
       position: 'Research and Development Lead',
-      image: '/assets/Navinya Yede.jpg',
+      image: '/assets/yede.jpg',
       bio: 'Connecting our members with valuable resources and opportunities for growth.',
       achievements: ['Secured partnerships for workshops', 'Developed a mentorship program', 'Curated learning materials'],
       experience: '2+ years in community development',
@@ -332,7 +332,7 @@ const Members: React.FC = () => {
                           </a>
                         )}
                         {member.social.email && (
-                          <a href={member.social.email} className="text-white/70 hover:text-neon-yellow transition-colors">
+                                     <a href={`mailto:${member.social.email}`} className="text-white/70 hover:text-neon-yellow transition-colors">
                             <Mail size={16} />
                           </a>
                         )}
@@ -385,7 +385,7 @@ const Members: React.FC = () => {
                           </a>
                         )}
                         {member.social.email && (
-                          <a href={member.social.email} className="text-white/70 hover:text-neon-yellow transition-colors">
+                          <a href={`mailto:${member.social.email}`} className="text-white/70 hover:text-neon-yellow transition-colors">
                             <Mail size={16} />
                           </a>
                         )}
