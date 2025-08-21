@@ -127,7 +127,7 @@ const Cygnus: React.FC = () => {
               Cygnus- a tech saga across the stars
             </p>
             <p className="text-sm sm:text-lg text-white/70 max-w-3xl mx-auto mb-8 sm:mb-12 px-4">
-              "In a galaxy not so far away, a signal has echoed across the stars... CYGNUS of has returned."
+              "In a galaxy not so far away, a signal has echoed across the stars... CYGNUS has returned."
             </p>
 
             {/* Countdown Timer */}
