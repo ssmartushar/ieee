@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Calendar, Clock, MapPin, Users, Trophy, Code, Zap, Brain, Gamepad2, ExternalLink, Star } from 'lucide-react';
+import ScrollStack, { ScrollStackItem } from '../components/ScrollStack';
 
 interface CygnusEvent {
   id: string;
@@ -255,6 +256,101 @@ const Cygnus: React.FC = () => {
                 An unforgettable weekend of hacking, mentorship from industry experts, exciting challenges, and the chance to bring your most ambitious ideas to life. Plus, there are amazing prizes to be won!
               </p>
             </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Card Highlights */}
+      <section className="relative z-10 py-12 sm:py-20 px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto">
+          <motion.h2
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-2xl sm:text-4xl font-bold text-center mb-8 sm:mb-16 text-white"
+          >
+            Event Highlights
+          </motion.h2>
+          
+          <div className="h-[650px] sm:h-[780px] w-full">
+            <ScrollStack>
+              <ScrollStackItem>
+                <div className="bg-gradient-to-br from-yellow-600/60 to-yellow-800/60 border border-yellow-400/50 rounded-2xl sm:rounded-3xl p-4 sm:p-8 h-full flex flex-col justify-center backdrop-blur-sm">
+                  <div className="flex items-center mb-4 sm:mb-6">
+                    <div className="p-2 sm:p-3 bg-yellow-500/40 rounded-full mr-3 sm:mr-4 flex-shrink-0">
+                      <Code className="w-6 h-6 sm:w-8 sm:h-8 text-yellow-400" />
+                    </div>
+                    <h3 className="text-lg sm:text-2xl font-bold text-white leading-tight">24-Hour Hackathon</h3>
+                  </div>
+                  <p className="text-white/90 text-sm sm:text-lg leading-relaxed flex-1">
+                    Immerse yourself in an intensive 24-hour coding marathon where innovation meets execution. 
+                    Build groundbreaking solutions that could change the world.
+                  </p>
+                  <div className="mt-4 sm:mt-6 flex items-center text-yellow-400 flex-shrink-0">
+                    <Clock className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+                    <span className="text-xs sm:text-sm">24 Hours of Pure Innovation</span>
+                  </div>
+                </div>
+              </ScrollStackItem>
+              
+              <ScrollStackItem>
+                <div className="bg-gradient-to-br from-blue-600 to-blue-800 border border-blue-400 rounded-2xl sm:rounded-3xl p-4 sm:p-8 h-full flex flex-col justify-center">
+                  <div className="flex items-center mb-4 sm:mb-6">
+                    <div className="p-2 sm:p-3 bg-blue-500 rounded-full mr-3 sm:mr-4 flex-shrink-0">
+                      <Trophy className="w-6 h-6 sm:w-8 sm:h-8 text-blue-900" />
+                    </div>
+                    <h3 className="text-lg sm:text-2xl font-bold text-white leading-tight">₹10,000+ Prize Pool</h3>
+                  </div>
+                  <p className="text-white text-sm sm:text-lg leading-relaxed flex-1">
+                    Compete for an impressive prize pool worth over ₹10,000. 
+                    Your innovative ideas could earn you recognition and rewards.
+                  </p>
+                  <div className="mt-4 sm:mt-6 flex items-center text-blue-200 flex-shrink-0">
+                    <Star className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+                    <span className="text-xs sm:text-sm">Multiple Prize Categories</span>
+                  </div>
+                </div>
+              </ScrollStackItem>
+              
+              <ScrollStackItem>
+                <div className="bg-gradient-to-br from-purple-600 to-purple-800 border border-purple-400 rounded-2xl sm:rounded-3xl p-4 sm:p-8 h-full flex flex-col justify-center">
+                  <div className="flex items-center mb-4 sm:mb-6">
+                    <div className="p-2 sm:p-3 bg-purple-500 rounded-full mr-3 sm:mr-4 flex-shrink-0">
+                      <Users className="w-6 h-6 sm:w-8 sm:h-8 text-purple-900" />
+                    </div>
+                    <h3 className="text-lg sm:text-2xl font-bold text-white leading-tight">500+ Participants</h3>
+                  </div>
+                  <p className="text-white text-sm sm:text-lg leading-relaxed flex-1">
+                    Join a community of 500+ brilliant minds from across the region. 
+                    Network, collaborate, and learn from fellow tech enthusiasts.
+                  </p>
+                  <div className="mt-4 sm:mt-6 flex items-center text-purple-200 flex-shrink-0">
+                    <Brain className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+                    <span className="text-xs sm:text-sm">Collaborative Learning Environment</span>
+                  </div>
+                </div>
+              </ScrollStackItem>
+              
+              <ScrollStackItem>
+                <div className="bg-gradient-to-br from-green-600 to-green-800 border border-green-400 rounded-2xl sm:rounded-3xl p-4 sm:p-8 h-full flex flex-col justify-center">
+                  <div className="flex items-center mb-4 sm:mb-6">
+                    <div className="p-2 sm:p-3 bg-green-500 rounded-full mr-3 sm:mr-4 flex-shrink-0">
+                      <Zap className="w-6 h-6 sm:w-8 sm:h-8 text-green-900" />
+                    </div>
+                    <h3 className="text-lg sm:text-2xl font-bold text-white leading-tight">Expert Mentorship</h3>
+                  </div>
+                  <p className="text-white text-sm sm:text-lg leading-relaxed flex-1">
+                    Get guidance from industry experts and seasoned professionals. 
+                    Learn cutting-edge technologies and best practices.
+                  </p>
+                  <div className="mt-4 sm:mt-6 flex items-center text-green-200 flex-shrink-0">
+                    <Gamepad2 className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+                    <span className="text-xs sm:text-sm">Hands-on Workshops & Sessions</span>
+                  </div>
+                </div>
+              </ScrollStackItem>
+            </ScrollStack>
           </div>
         </div>
       </section>
