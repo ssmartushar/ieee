@@ -4,7 +4,7 @@ import HyperdriveEffect from '../components/HyperdriveEffect';
 import LegalModal from '../components/LegalModal';
 import { 
   Users, Calendar, Award, Instagram, Linkedin, Mail, Star,
-  Zap, Cpu, Wifi, Rocket 
+  Zap, Cpu, Wifi 
 } from 'lucide-react';
 
 const AnimatedCounter = ({ end }: { end: number }) => {
@@ -51,10 +51,6 @@ const Home: React.FC = () => {
       setModalContent({ title: 'Terms of Service', content: <TermsOfServiceContent /> });
     }
     setIsModalOpen(true);
-  };
-
-  const handleVolunteerClick = () => {
-    window.open('https://forms.gle/VBtg6USrhRX9dRiY6', '_blank');
   };
 
   const PrivacyPolicyContent = () => (
@@ -215,18 +211,6 @@ const Home: React.FC = () => {
                   A space where curiosity becomes code, and ideas become impact.
                   IEEE CS — shaping minds, one keystroke at a time.
                 </motion.p>
-
-                <motion.button
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.5, delay: 2 }}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={handleVolunteerClick}
-                  className="neon-button"
-                >
-                  Call for Volunteers <Rocket className="inline-block ml-2" size={20} />
-                </motion.button>
               </div>
             </section>
 
