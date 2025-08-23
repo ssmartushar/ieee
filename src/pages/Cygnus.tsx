@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Calendar, Clock, MapPin, Users, Trophy, Code, Zap, Brain, Gamepad2, ExternalLink, Star } from 'lucide-react';
+import { Calendar, Clock, MapPin, Users, Trophy, Code, Zap, Brain, Gamepad2, ExternalLink, Star, ChevronRight, X } from 'lucide-react';
 import ScrollStack, { ScrollStackItem } from '../components/ScrollStack';
+import MagicBento from '../components/MagicBento';
+import LightsaberCursor from '../components/LightsaberCursor';
 
 interface CygnusEvent {
   id: string;
@@ -62,6 +64,10 @@ const Cygnus: React.FC = () => {
   ];
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [saberColor, setSaberColor] = useState<string>('#ff2a2a');
+  const [saberLength, setSaberLength] = useState<number>(100);
+  const [saberThickness, setSaberThickness] = useState<number>(8);
+  const [controlsOpen, setControlsOpen] = useState<boolean>(false);
 
   useEffect(() => {
     const slideshowTimer = setInterval(() => {
@@ -70,8 +76,170 @@ const Cygnus: React.FC = () => {
     return () => clearInterval(slideshowTimer);
   }, [pastEventImages.length]);
 
+  // Persist and restore saber settings
+  useEffect(() => {
+    try {
+      const savedColor = localStorage.getItem('cygnus_saber_color');
+      const savedLen = localStorage.getItem('cygnus_saber_length');
+      const savedThk = localStorage.getItem('cygnus_saber_thickness');
+      if (savedColor) setSaberColor(savedColor);
+      if (savedLen) setSaberLength(Math.max(40, Math.min(220, parseInt(savedLen))));
+      if (savedThk) setSaberThickness(Math.max(3, Math.min(20, parseInt(savedThk))));
+    } catch {}
+  }, []);
+
+  useEffect(() => {
+    try { localStorage.setItem('cygnus_saber_color', saberColor); } catch {}
+  }, [saberColor]);
+  useEffect(() => {
+    try { localStorage.setItem('cygnus_saber_length', String(saberLength)); } catch {}
+  }, [saberLength]);
+  useEffect(() => {
+    try { localStorage.setItem('cygnus_saber_thickness', String(saberThickness)); } catch {}
+  }, [saberThickness]);
+
   return (
-    <div className="pt-8 sm:pt-16 min-h-screen bg-black overflow-x-hidden">
+    <div className="pt-8 sm:pt-16 min-h-screen bg-black overflow-x-hidden relative">
+      {/* Corner glow overlay matching saber color */}
+      <div
+        className="pointer-events-none fixed inset-0"
+        style={{
+          background: `
+            /* Corners */
+            radial-gradient(32vw 32vw at 0% 0%, ${saberColor}22, transparent 65%),
+            radial-gradient(32vw 32vw at 100% 0%, ${saberColor}22, transparent 65%),
+            radial-gradient(32vw 32vw at 0% 100%, ${saberColor}22, transparent 65%),
+            radial-gradient(32vw 32vw at 100% 100%, ${saberColor}22, transparent 65%),
+            /* Mid patches */
+            radial-gradient(20vw 20vw at 15% 30%, ${saberColor}18, transparent 70%),
+            radial-gradient(24vw 24vw at 85% 25%, ${saberColor}1a, transparent 70%),
+            radial-gradient(18vw 18vw at 25% 75%, ${saberColor}14, transparent 70%),
+            radial-gradient(22vw 22vw at 75% 70%, ${saberColor}16, transparent 70%),
+            radial-gradient(28vw 28vw at 50% 10%, ${saberColor}12, transparent 75%),
+            radial-gradient(28vw 28vw at 50% 90%, ${saberColor}12, transparent 75%),
+            /* Soft center wash */
+            radial-gradient(60vw 60vw at 50% 50%, ${saberColor}0d, transparent 80%),
+            /* Edge glows */
+            linear-gradient(to bottom, ${saberColor}12, transparent 20%),
+            linear-gradient(to top, ${saberColor}12, transparent 20%),
+            linear-gradient(to right, ${saberColor}12, transparent 20%),
+            linear-gradient(to left, ${saberColor}12, transparent 20%)
+          `,
+          zIndex: 2147483645,
+        }}
+      />
+
+      {/* Lightsaber cursor, color follows selection */}
+      <LightsaberCursor color={saberColor} bladeLength={saberLength} thickness={saberThickness} glow={22} hideNative={true} />
+
+      {/* Controls Toggle + Sidebar */}
+      <motion.button
+        onClick={() => setControlsOpen(v => !v)}
+        whileTap={{ scale: 0.95 }}
+        whileHover={{ scale: 1.05 }}
+        className="fixed top-1/2 -translate-y-1/2 left-2 z-[2147483647] bg-black/70 border border-yellow-400/30 text-yellow-300 hover:text-yellow-200 rounded-full w-9 h-9 flex items-center justify-center shadow-lg backdrop-blur"
+        aria-label={controlsOpen ? 'Close controls' : 'Open controls'}
+      >
+        <motion.div animate={{ rotate: controlsOpen ? 180 : 0 }} transition={{ type: 'spring', stiffness: 260, damping: 20 }}>
+          <ChevronRight className="w-5 h-5" />
+        </motion.div>
+      </motion.button>
+
+      <motion.div
+        className="fixed top-1/2 -translate-y-1/2 left-0 z-[2147483647]"
+        initial={false}
+        animate={{ x: controlsOpen ? 0 : '-110%', opacity: controlsOpen ? 1 : 0 }}
+        transition={{ type: 'spring', stiffness: 220, damping: 24 }}
+        style={{ pointerEvents: controlsOpen ? 'auto' : 'none' }}
+        onMouseEnter={() => {
+          // cancel pending auto-hide
+          // @ts-ignore
+          if ((window as any).__cygnusSidebarTimer) clearTimeout((window as any).__cygnusSidebarTimer);
+        }}
+        onPointerMove={() => {
+          // keep it open while interacting
+          // @ts-ignore
+          if ((window as any).__cygnusSidebarTimer) clearTimeout((window as any).__cygnusSidebarTimer);
+        }}
+        onMouseLeave={() => {
+          // start 3s auto-hide if the cursor leaves the sidebar area
+          // @ts-ignore
+          if ((window as any).__cygnusSidebarTimer) clearTimeout((window as any).__cygnusSidebarTimer);
+          // @ts-ignore
+          (window as any).__cygnusSidebarTimer = window.setTimeout(() => {
+            setControlsOpen(false);
+          }, 3000);
+        }}
+      >
+        <div className="relative bg-black/80 border border-yellow-400/30 backdrop-blur-xl rounded-r-2xl px-4 py-5 shadow-2xl w-56">
+          {controlsOpen && (
+            <button
+              onClick={() => setControlsOpen(false)}
+              className="absolute -right-3 -top-3 w-7 h-7 rounded-full bg-black/80 border border-yellow-400/30 text-yellow-300 hover:text-yellow-200 shadow flex items-center justify-center"
+              aria-label="Close controls"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          )}
+          <div className="text-xs uppercase tracking-widest text-yellow-300/80 mb-3">Lightsaber</div>
+          <div className="grid grid-cols-6 gap-2 mb-4">
+            {[
+              { c: '#ff2a2a', name: 'Sith Red' },
+              { c: '#2a6cff', name: 'Jedi Blue' },
+              { c: '#22c55e', name: 'Jedi Green' },
+              { c: '#a855f7', name: 'Mace Purple' },
+              { c: '#fde047', name: 'Yellow' },
+              { c: '#ffffff', name: 'White' },
+            ].map((opt) => (
+              <button
+                key={opt.c}
+                aria-label={opt.name}
+                title={opt.name}
+                onClick={() => setSaberColor(opt.c)}
+                className={`h-6 rounded-md ring-1 transition-transform hover:scale-110 ${saberColor === opt.c ? 'ring-yellow-400' : 'ring-white/20'}`}
+                style={{ background: opt.c }}
+              />
+            ))}
+          </div>
+
+          <div className="space-y-4">
+            <div>
+              <div className="flex items-center justify-between text-[11px] text-white/70 mb-1">
+                <span>Length</span>
+                <span>{saberLength}px</span>
+              </div>
+              <input
+                type="range"
+                min={40}
+                max={220}
+                step={2}
+                value={saberLength}
+                onChange={(e) => setSaberLength(parseInt(e.target.value))}
+                className="w-full accent-yellow-400 h-1.5 rounded-lg bg-white/10"
+              />
+            </div>
+            <div>
+              <div className="flex items-center justify-between text-[11px] text-white/70 mb-1">
+                <span>Thickness</span>
+                <span>{saberThickness}px</span>
+              </div>
+              <input
+                type="range"
+                min={3}
+                max={20}
+                step={1}
+                value={saberThickness}
+                onChange={(e) => setSaberThickness(parseInt(e.target.value))}
+                className="w-full accent-yellow-400 h-1.5 rounded-lg bg-white/10"
+              />
+            </div>
+          </div>
+
+          <div className="mt-4 border-t border-white/10 pt-3 text-[11px] text-white/50">
+            Settings persist automatically
+          </div>
+        </div>
+      </motion.div>
       <AnimatePresence>
         {showPopup && (
           <motion.div
@@ -181,16 +349,17 @@ const Cygnus: React.FC = () => {
             </motion.div>
 
             <motion.button
-              onClick={() => setShowPopup(true)}
+              onClick={() => window.open('https://forms.gle/UWzYdMZX4ZLA6R869', '_blank')}
               className="bg-gradient-to-r from-yellow-600 to-yellow-800 hover:from-yellow-500 hover:to-yellow-700 text-black font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-full border-2 border-yellow-400 shadow-lg transition-all duration-300 text-base sm:text-lg inline-flex items-center mx-4"
             >
-              Join the Rebellion
+              Register Now
               <ExternalLink className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
             </motion.button>
 
           </motion.div>
         </div>
       </section>
+
 
       {/* About Cygnus Section */}
       <section className="relative z-10 py-12 sm:py-20 px-4 sm:px-6 bg-black">
@@ -206,6 +375,25 @@ const Cygnus: React.FC = () => {
           </motion.h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+            {/* About Us */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+              viewport={{ once: true }}
+              className="bg-black/20 rounded-lg p-4 sm:p-6"
+            >
+              <div className="flex items-start sm:items-center mb-4">
+                <div className="p-2 bg-yellow-500/20 rounded-full mr-3 sm:mr-4 flex-shrink-0">
+                  <Star className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-400" />
+                </div>
+                <h3 className="text-lg sm:text-2xl font-bold text-white leading-tight">About Us</h3>
+              </div>
+              <p className="text-sm sm:text-base text-white/80 leading-relaxed">
+                IEEE CS SBC - GHRCE is a vibrant Student Branch Chapter driving social impact via computer science and emerging tech, nurturing technical skills and leadership through workshops, seminars, and events.
+              </p>
+            </motion.div>
+
             {/* What is Cygnus? */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
@@ -221,28 +409,10 @@ const Cygnus: React.FC = () => {
                 <h3 className="text-lg sm:text-2xl font-bold text-white leading-tight">What is Cygnus?</h3>
               </div>
               <p className="text-sm sm:text-base text-white/80 leading-relaxed">
-                Cygnus is a premier 2-day hackathon where the brightest minds converge to build, innovate, and create solutions to real-world problems. It's more than just a competition; it's a celebration of creativity, collaboration, and cutting-edge technology.
+                Cygnus is a premier 2-day hackathon where the brightest minds converge to build, innovate, and create solutions to real-world problems. Beyond a fest, it’s an intergalactic journey — hackathons, hands-on workshops, speaker sessions, competitions, and career tracks — where ideas shine like stars, teamwork is the force, and technology leads to new horizons.
               </p>
             </motion.div>
 
-            {/* Why be a part of it? */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              viewport={{ once: true }}
-              className="bg-black/20 rounded-lg p-4 sm:p-6"
-            >
-              <div className="flex items-start sm:items-center mb-4">
-                <div className="p-2 bg-yellow-500/20 rounded-full mr-3 sm:mr-4 flex-shrink-0">
-                  <Star className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-400" />
-                </div>
-                <h3 className="text-lg sm:text-2xl font-bold text-white leading-tight">Why Be a Part of It?</h3>
-              </div>
-              <p className="text-sm sm:text-base text-white/80 leading-relaxed">
-                To push your limits, expand your network, and be at the forefront of technological innovation. Cygnus offers a unique platform to challenge yourself, learn from peers, and make a tangible impact.
-              </p>
-            </motion.div>
 
             {/* Who can join? */}
             <motion.div 
@@ -277,16 +447,21 @@ const Cygnus: React.FC = () => {
                 </div>
                 <h3 className="text-lg sm:text-2xl font-bold text-white leading-tight">What to Expect?</h3>
               </div>
-              <p className="text-sm sm:text-base text-white/80 leading-relaxed">
-                An unforgettable weekend of hacking, mentorship from industry experts, exciting challenges, and the chance to bring your most ambitious ideas to life. Plus, there are amazing prizes to be won!
-              </p>
+              <ul className="text-sm sm:text-base text-white/80 leading-relaxed list-disc pl-5 space-y-1">
+                <li>Hands‑on Workshops & Hackathon — build, code, and create in immersive sessions</li>
+                <li>Tech Talks & Keynotes — learn from innovators, leaders, and visionaries</li>
+                <li>Competitions & Games — solve problems and spark imagination</li>
+                <li>Career Fair & Clinics — meet recruiters and refine your profile</li>
+                <li>Panels & Learning Tracks — explore cutting‑edge trends with guidance</li>
+                <li>Swags & Giveaways — take home memories and mementos</li>
+              </ul>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Card Highlights */}
-      <section className="relative z-10 py-12 sm:py-20 px-4 sm:px-6">
+      {/* Card Highlights (hidden on mobile to prevent scroll blocking) */}
+      <section className="relative z-10 py-12 sm:py-20 px-4 sm:px-6 hidden md:block">
         <div className="max-w-7xl mx-auto">
           <motion.h2
             initial={{ opacity: 0 }}
@@ -295,7 +470,7 @@ const Cygnus: React.FC = () => {
             viewport={{ once: true }}
             className="text-2xl sm:text-4xl font-bold text-center mb-8 sm:mb-16 text-white"
           >
-            Event Highlights
+            Explore Cygnus
           </motion.h2>
           
           <div className="h-[650px] sm:h-[780px] w-full">
@@ -380,6 +555,74 @@ const Cygnus: React.FC = () => {
         </div>
       </section>
 
+      {/* Magic Bento: Deep-dive content (reveals on hover) */}
+      <section className="relative z-10 py-6 sm:py-14 px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto">
+          <motion.h3
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-xl sm:text-3xl font-semibold text-white mb-4 sm:mb-8 text-center"
+          >
+            Learn More — Hover to Reveal
+          </motion.h3>
+          <div className="w-full flex justify-center">
+            <MagicBento
+              enableTilt={false}
+              enableMagnetism={true}
+              enableSpotlight={true}
+              enableBorderGlow={true}
+              glowColor="255, 211, 0"
+              items={[
+              {
+                label: 'Goal',
+                title: 'Goals of Cygnus',
+                description:
+                  'Facilitate meaningful networking between students, industry professionals, peers, and mentors to build lasting relationships; and promote practical learning through hands‑on activities and real‑world challenges that bridge theory with application.',
+                color: '#0a0f12'
+              },
+              {
+                label: 'Our Mission',
+                title: 'Our Mission',
+                description:
+                  'Build a collaborative ecosystem for students, professionals, and enthusiasts to exchange ideas, inspire innovation, and grow together.',
+                color: '#0a0f12'
+              },
+              {
+                label: 'Bridge the Gap',
+                title: 'Academia ↔ Industry',
+                description:
+                  'Industry experts, real challenges, and practical exposure ensure concepts are applied meaningfully, preparing participants to transition smoothly from classroom learning to industry expectations.',
+                color: '#0a0f12'
+              },
+              {
+                label: 'Empowerment',
+                title: 'Beyond Theory',
+                description:
+                  'Workshops, hackathons, and guided tracks build practical skills, sharpen problem‑solving, and grow confidence—empowering you to ship ideas and lead teams.',
+                color: '#0a0f12'
+              },
+              {
+                label: 'Impact',
+                title: 'Community Impact',
+                description:
+                  'Boost engagement and exposure by amplifying hackathon participation and elevating awareness of IEEE CS programs and benefits; nurture lasting confidence so the experience inspires growth long after the lights dim.',
+                color: '#0a0a10'
+              },
+              {
+                label: 'Elevate',
+                title: 'Elevate Highlights',
+                description:
+                  'A power‑packed Elevate experience—real challenges, expert mentors, quizzes, sessions, late‑night jamming, and goodies—made 2024 unforgettable and enriching with sharpened skills, stronger networks, and vibrant community energy.',
+                color: '#0b0b12'
+              },
+              ]}
+            />
+          </div>
+        </div>
+      </section>
+
       {/* Community Partners Section */}
       <section className="relative z-10 py-12 sm:py-20 px-4 sm:px-6 bg-gradient-to-br from-purple-900/20 to-black/50">
         <div className="max-w-7xl mx-auto">
@@ -399,47 +642,8 @@ const Cygnus: React.FC = () => {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center">
-            {/* Partner Benefits */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              viewport={{ once: true }}
-              className="space-y-6"
-            >
-              <h3 className="text-xl sm:text-2xl font-bold text-white mb-6">
-                Partnership Benefits
-              </h3>
-              
-              <div className="flex items-start space-x-4">
-                <div className="p-2 bg-purple-500/20 rounded-full flex-shrink-0 mt-1">
-                  <Users className="w-5 h-5 text-purple-400" />
-                </div>
-                <div>
-                  <h4 className="text-lg font-semibold text-white mb-2">Talent Discovery</h4>
-                  <p className="text-white/70 text-sm sm:text-base">
-                    Connect with 500+ brilliant minds and identify future tech leaders for your organization.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start space-x-4">
-                <div className="p-2 bg-purple-500/20 rounded-full flex-shrink-0 mt-1">
-                  <Zap className="w-5 h-5 text-purple-400" />
-                </div>
-                <div>
-                  <h4 className="text-lg font-semibold text-white mb-2">Brand Visibility</h4>
-                  <p className="text-white/70 text-sm sm:text-base">
-                    Showcase your brand to a highly engaged tech-savvy audience across multiple platforms.
-                  </p>
-                </div>
-              </div>
-
-
-            </motion.div>
-
-            {/* CTA Section */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-stretch">
+            {/* Community Partner CTA */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -447,7 +651,7 @@ const Cygnus: React.FC = () => {
               viewport={{ once: true }}
               className="text-center lg:text-left"
             >
-              <div className="bg-gradient-to-br from-purple-600/20 to-purple-800/20 border border-purple-400/30 rounded-3xl p-6 sm:p-8 backdrop-blur-sm">
+              <div className="bg-gradient-to-br from-purple-600/20 to-purple-800/20 border border-purple-400/30 rounded-3xl p-6 sm:p-8 backdrop-blur-sm h-full">
                 <div className="mb-6">
                   <div className="flex items-center justify-center lg:justify-start mb-4">
                     <div className="p-3 bg-purple-500/30 rounded-full mr-3">
@@ -463,7 +667,7 @@ const Cygnus: React.FC = () => {
 
                 <div className="space-y-4">
                   <motion.button
-                    onClick={() => setShowPopup(true)}
+                    onClick={() => window.open('https://forms.gle/5shPMTYTw9YFtsxg8', '_blank')}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     className="w-full bg-gradient-to-r from-purple-600 to-purple-800 hover:from-purple-500 hover:to-purple-700 text-white font-bold py-4 px-8 rounded-full border-2 border-purple-400 shadow-lg transition-all duration-300 text-base sm:text-lg inline-flex items-center justify-center"
@@ -478,7 +682,154 @@ const Cygnus: React.FC = () => {
                 </div>
               </div>
             </motion.div>
+            
+            {/* Sponsors CTA */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+              viewport={{ once: true }}
+              className="text-center lg:text-left"
+            >
+              <div className="bg-gradient-to-br from-yellow-600/20 to-yellow-800/20 border border-yellow-400/30 rounded-3xl p-6 sm:p-8 backdrop-blur-sm h-full">
+                <div className="mb-6">
+                  <div className="flex items-center justify-center lg:justify-start mb-4">
+                    <div className="p-3 bg-yellow-500/30 rounded-full mr-3">
+                      <Trophy className="w-8 h-8 text-yellow-400" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-white">Become a Sponsor</h3>
+                  </div>
+                  <p className="text-white/70 mb-6 text-sm sm:text-base">
+                    Elevate your brand at one of the region's most exciting hackathons. Get premium visibility,
+                    direct engagement with talent, and custom activation opportunities.
+                  </p>
+                </div>
+
+                <div className="space-y-4">
+                  <motion.button
+                    onClick={() => window.open('https://forms.cloud.microsoft/r/eG72ivrGhH', '_blank')}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="w-full bg-gradient-to-r from-yellow-600 to-yellow-800 hover:from-yellow-500 hover:to-yellow-700 text-black font-bold py-4 px-8 rounded-full border-2 border-yellow-400 shadow-lg transition-all duration-300 text-base sm:text-lg inline-flex items-center justify-center"
+                  >
+                    Join as Sponsor
+                    <ExternalLink className="ml-2 w-5 h-5" />
+                  </motion.button>
+
+                  <p className="text-yellow-300/70 text-xs sm:text-sm text-center">
+                    Sponsorship starts from ₹25,000 • Custom tiers available
+                  </p>
+                </div>
+              </div>
+            </motion.div>
           </div>
+
+          {/* Partnership Benefits (below both cards) */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="mt-14 sm:mt-16"
+          >
+            <h3 className="text-2xl sm:text-3xl font-bold text-yellow-400 mb-4 sm:mb-6 text-center tracking-wide">
+              Partnership Benefits
+            </h3>
+
+            <div className="rounded-3xl border border-yellow-400/20 bg-black/30 backdrop-blur-sm p-5 sm:p-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+              <div className="flex items-start space-x-4 rounded-2xl p-5 sm:p-6 border border-yellow-400/20 bg-black/40 hover:bg-black/50 transition-colors">
+                <div className="p-2.5 bg-yellow-500/10 rounded-xl flex-shrink-0 mt-1">
+                  <Users className="w-5 h-5 text-yellow-400" />
+                </div>
+                <div>
+                  <h4 className="text-base sm:text-lg font-semibold text-white mb-1">Talent Discovery</h4>
+                  <p className="text-white/70 text-sm">Connect with 500+ bright participants; shortlist for internships and full-time roles.</p>
+                </div>
+              </div>
+
+              <div className="flex items-start space-x-4 rounded-2xl p-5 sm:p-6 border border-yellow-400/20 bg-black/40 hover:bg-black/50 transition-colors">
+                <div className="p-2.5 bg-yellow-500/10 rounded-xl flex-shrink-0 mt-1">
+                  <Star className="w-5 h-5 text-yellow-400" />
+                </div>
+                <div>
+                  <h4 className="text-base sm:text-lg font-semibold text-white mb-1">Premium Visibility</h4>
+                  <p className="text-white/70 text-sm">Logo on website, stage, merch, and social promos reaching thousands.</p>
+                </div>
+              </div>
+
+              <div className="flex items-start space-x-4 rounded-2xl p-5 sm:p-6 border border-yellow-400/20 bg-black/40 hover:bg-black/50 transition-colors">
+                <div className="p-2.5 bg-yellow-500/10 rounded-xl flex-shrink-0 mt-1">
+                  <Calendar className="w-5 h-5 text-yellow-400" />
+                </div>
+                <div>
+                  <h4 className="text-base sm:text-lg font-semibold text-white mb-1">Stage Time</h4>
+                  <p className="text-white/70 text-sm">Keynote or lightning talks to present your mission, products, and roles.</p>
+                </div>
+              </div>
+
+              <div className="flex items-start space-x-4 rounded-2xl p-5 sm:p-6 border border-yellow-400/20 bg-black/40 hover:bg-black/50 transition-colors">
+                <div className="p-2.5 bg-yellow-500/10 rounded-xl flex-shrink-0 mt-1">
+                  <Brain className="w-5 h-5 text-yellow-400" />
+                </div>
+                <div>
+                  <h4 className="text-base sm:text-lg font-semibold text-white mb-1">Mentor Access</h4>
+                  <p className="text-white/70 text-sm">Engage as judges or mentors and directly influence problem statements.</p>
+                </div>
+              </div>
+
+              <div className="flex items-start space-x-4 rounded-2xl p-5 sm:p-6 border border-yellow-400/20 bg-black/40 hover:bg-black/50 transition-colors">
+                <div className="p-2.5 bg-yellow-500/10 rounded-xl flex-shrink-0 mt-1">
+                  <Code className="w-5 h-5 text-yellow-400" />
+                </div>
+                <div>
+                  <h4 className="text-base sm:text-lg font-semibold text-white mb-1">Product Adoption</h4>
+                  <p className="text-white/70 text-sm">Run API/SDK tracks, distribute credits, and drive developer adoption.</p>
+                </div>
+              </div>
+
+              <div className="flex items-start space-x-4 rounded-2xl p-5 sm:p-6 border border-yellow-400/20 bg-black/40 hover:bg-black/50 transition-colors">
+                <div className="p-2.5 bg-yellow-500/10 rounded-xl flex-shrink-0 mt-1">
+                  <Trophy className="w-5 h-5 text-yellow-400" />
+                </div>
+                <div>
+                  <h4 className="text-base sm:text-lg font-semibold text-white mb-1">Sponsored Prizes</h4>
+                  <p className="text-white/70 text-sm">Sponsor special awards to spotlight your tech and attract top submissions.</p>
+                </div>
+              </div>
+
+              <div className="flex items-start space-x-4 rounded-2xl p-5 sm:p-6 border border-yellow-400/20 bg-black/40 hover:bg-black/50 transition-colors">
+                <div className="p-2.5 bg-yellow-500/10 rounded-xl flex-shrink-0 mt-1">
+                  <MapPin className="w-5 h-5 text-yellow-400" />
+                </div>
+                <div>
+                  <h4 className="text-base sm:text-lg font-semibold text-white mb-1">Campus Outreach</h4>
+                  <p className="text-white/70 text-sm">Access student chapters and post-event mailing for continued engagement.</p>
+                </div>
+              </div>
+
+              <div className="flex items-start space-x-4 rounded-2xl p-5 sm:p-6 border border-yellow-400/20 bg-black/40 hover:bg-black/50 transition-colors">
+                <div className="p-2.5 bg-yellow-500/10 rounded-xl flex-shrink-0 mt-1">
+                  <Gamepad2 className="w-5 h-5 text-yellow-400" />
+                </div>
+                <div>
+                  <h4 className="text-base sm:text-lg font-semibold text-white mb-1">Gaming and Esports</h4>
+                  <p className="text-white/70 text-sm">Host gaming tournaments, showcase your gaming products, and engage with the gaming community.</p>
+                </div>
+              </div>
+
+              <div className="flex items-start space-x-4 rounded-2xl p-5 sm:p-6 border border-yellow-400/20 bg-black/40 hover:bg-black/50 transition-colors">
+                <div className="p-2.5 bg-yellow-500/10 rounded-xl flex-shrink-0 mt-1">
+                  <Zap className="w-5 h-5 text-yellow-400" />
+                </div>
+                <div>
+                  <h4 className="text-base sm:text-lg font-semibold text-white mb-1">Innovation Challenges</h4>
+                  <p className="text-white/70 text-sm">Host innovation challenges, hackathons, or ideathons to drive innovation and solve real-world problems.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          </motion.div>
         </div>
       </section>
 
