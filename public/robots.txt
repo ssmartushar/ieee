@@ -1,0 +1,10 @@
+# robots.txt for IEEE CS GHRCE
+User-agent: *
+Allow: /
+
+# Disallow common non-public paths (adjust if needed)
+Disallow: /admin/
+Disallow: /api/
+
+# Point search engines to your sitemap
+Sitemap: https://your-domain.tld/sitemap.xml

@@ -574,6 +574,8 @@ const MagicBento: React.FC<BentoProps> = ({
   const isMobile = useMobileDetection();
   const shouldDisableAnimations = disableAnimations || isMobile;
   const [activeItem, setActiveItem] = useState<BentoCardProps | null>(null);
+  const scrollYRef = useRef<number>(0);
+  const isLockedRef = useRef<boolean>(false);
 
   const LONG_DESC_CHARS = 140;
 
@@ -584,6 +586,63 @@ const MagicBento: React.FC<BentoProps> = ({
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
   }, []);
+
+  // Lock body scroll on mobile when modal is open
+  useEffect(() => {
+    if (!isMobile) return; // only enforce on mobile
+
+    const body = document.body;
+    const html = document.documentElement;
+
+    const lock = () => {
+      if (isLockedRef.current) return;
+      scrollYRef.current = window.scrollY || window.pageYOffset || 0;
+      body.style.position = "fixed";
+      body.style.top = `-${scrollYRef.current}px`;
+      body.style.left = "0";
+      body.style.right = "0";
+      body.style.width = "100%";
+      body.style.overflow = "hidden";
+      // Prevent overscroll bounce on some browsers
+      (body as any).style.touchAction = "none";
+      (html as any).style.overscrollBehavior = "none";
+      isLockedRef.current = true;
+    };
+
+    const unlock = () => {
+      if (!isLockedRef.current) return;
+      // Read offset from body's top to be robust to re-renders
+      const topStr = body.style.top || "0";
+      const y = -parseInt(topStr, 10) || scrollYRef.current || 0;
+      // Avoid smooth scroll interfering with immediate restore
+      const prevScrollBehavior = html.style.scrollBehavior;
+      html.style.scrollBehavior = "auto";
+
+      body.style.position = "";
+      body.style.top = "";
+      body.style.left = "";
+      body.style.right = "";
+      body.style.width = "";
+      body.style.overflow = "";
+      (body as any).style.touchAction = "";
+      (html as any).style.overscrollBehavior = "";
+      window.scrollTo(0, y);
+      // Restore previous behavior after jump
+      html.style.scrollBehavior = prevScrollBehavior;
+      isLockedRef.current = false;
+    };
+
+    if (activeItem) {
+      lock();
+    } else {
+      unlock();
+    }
+
+    return () => {
+      // ensure cleanup in case component unmounts while locked
+      unlock();
+    };
+  }, [activeItem, isMobile]);
 
   return (
     <>

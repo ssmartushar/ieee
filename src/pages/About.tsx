@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { History, Users, Target, Award } from 'lucide-react';
+import SEO from '../components/SEO';
 
 const About: React.FC = () => {
   const timeline = [
@@ -101,7 +102,14 @@ const About: React.FC = () => {
   }, []);
 
   return (
-    <div className="pt-16">
+    <>
+      <SEO
+        title="About — IEEE CS GHRCE"
+        description="Our journey at IEEE CS GHRCE: history, impact, and vision. Explore our milestones and mission."
+        path="/about"
+        image="/assets/ieee1.png"
+      />
+      <div className="pt-16">
 
 
       {/* Hero Section */}
@@ -184,6 +192,7 @@ const About: React.FC = () => {
         </div>
     </section>*/}
     </div>
+    </>
   );
 };
 

@@ -6,6 +6,7 @@ import {
   Users, Calendar, Award, Instagram, Linkedin, Mail, Star,
   Zap, Cpu, Wifi 
 } from 'lucide-react';
+import SEO from '../components/SEO';
 
 const AnimatedCounter = ({ end }: { end: number }) => {
   const ref = useRef<HTMLSpanElement>(null);
@@ -127,7 +128,14 @@ const Home: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen relative">
+    <>
+      <SEO
+        title="IEEE CS GHRCE — Home"
+        description="Official IEEE Computer Society Student Branch Chapter at GHRCE, Nagpur. Explore events, hackathons, workshops, and our vibrant tech community."
+        path="/"
+        image="/assets/ieee1.png"
+      />
+      <div className="min-h-screen relative">
       <AnimatePresence>
         {showIntro && (
           <motion.div
@@ -354,7 +362,8 @@ const Home: React.FC = () => {
           </div>
         )}
       </AnimatePresence>
-    </div>
+      </div>
+    </>
   );
 };
 

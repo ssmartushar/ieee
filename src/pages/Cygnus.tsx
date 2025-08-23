@@ -4,6 +4,7 @@ import { Calendar, Clock, MapPin, Users, Trophy, Code, Zap, Brain, Gamepad2, Ext
 import ScrollStack, { ScrollStackItem } from '../components/ScrollStack';
 import MagicBento from '../components/MagicBento';
 import LightsaberCursor from '../components/LightsaberCursor';
+import SEO from '../components/SEO';
 
 interface CygnusEvent {
   id: string;
@@ -99,6 +100,13 @@ const Cygnus: React.FC = () => {
   }, [saberThickness]);
 
   return (
+    <>
+    <SEO
+      title="Cygnus — Annual Tech Symposium | IEEE CS GHRCE"
+      description="Cygnus: a premier 2-day hackathon and tech fest by IEEE CS GHRCE. Workshops, talks, competitions, and more."
+      path="/cygnus"
+      image="/assets/unnamed.png"
+    />
     <div className="pt-8 sm:pt-16 min-h-screen bg-black overflow-x-hidden relative">
       {/* Corner glow overlay matching saber color */}
       <div
@@ -923,6 +931,7 @@ const Cygnus: React.FC = () => {
         </div>
       </section>
     </div>
+    </>
   );
 };
 
