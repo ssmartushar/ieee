@@ -76,6 +76,7 @@ const Cygnus: React.FC = () => {
     const startY = React.useRef(0);
     const moved = React.useRef(false);
     const isTouch = React.useRef(false);
+    const lastTouchTime = React.useRef(0);
 
     const onPointerDown = (e: React.PointerEvent) => {
       isTouch.current = e.pointerType === 'touch';
@@ -99,22 +100,23 @@ const Cygnus: React.FC = () => {
         e.stopPropagation();
         return;
       }
+      // It's a deliberate tap
+      lastTouchTime.current = Date.now();
+      e.preventDefault();
+      e.stopPropagation();
       onActivate();
     };
 
     const onClick = (e: React.MouseEvent) => {
-      // If it was a touch that moved, suppress click
-      // @ts-ignore – access native pointerType if available
-      const pt = e.nativeEvent && (e.nativeEvent as any).pointerType;
-      if (pt === 'touch' && moved.current) {
+      // Ignore the synthetic click that follows touch
+      const now = Date.now();
+      if (now - lastTouchTime.current < 700) {
         e.preventDefault();
         e.stopPropagation();
         return;
       }
-      if (!pt) {
-        // mouse/keyboard
-        onActivate();
-      }
+      // If not from touch, treat as mouse/keyboard click
+      onActivate();
     };
 
     return { onPointerDown, onPointerMove, onPointerUp, onClick };

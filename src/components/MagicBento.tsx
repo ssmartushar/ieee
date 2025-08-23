@@ -136,7 +136,7 @@ const ParticleCard: React.FC<{
 }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const particlesRef = useRef<HTMLDivElement[]>([]);
-  const timeoutsRef = useRef<NodeJS.Timeout[]>([]);
+  const timeoutsRef = useRef<ReturnType<typeof setTimeout>[]>([]);
   const isHoveredRef = useRef(false);
   const memoizedParticles = useRef<HTMLDivElement[]>([]);
   const particlesInitialized = useRef(false);
@@ -529,7 +529,7 @@ const GlobalSpotlight: React.FC<{
 
 const BentoCardGrid: React.FC<{
   children: React.ReactNode;
-  gridRef?: React.RefObject<HTMLDivElement | null>;
+  gridRef?: React.RefObject<HTMLDivElement>;
 }> = ({ children, gridRef }) => (
   <div
     className="bento-section grid gap-2 p-3 max-w-[54rem] mx-auto select-none relative"
@@ -576,6 +576,7 @@ const MagicBento: React.FC<BentoProps> = ({
   const [activeItem, setActiveItem] = useState<BentoCardProps | null>(null);
   const scrollYRef = useRef<number>(0);
   const isLockedRef = useRef<boolean>(false);
+  const suppressClicksUntilRef = useRef<number>(0);
 
   const LONG_DESC_CHARS = 140;
 
@@ -586,6 +587,28 @@ const MagicBento: React.FC<BentoProps> = ({
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
   }, []);
+
+  // Capture-phase click suppression to avoid ghost clicks after closing modal
+  useEffect(() => {
+    const onDocClickCapture = (e: MouseEvent) => {
+      if (Date.now() < suppressClicksUntilRef.current) {
+        e.preventDefault();
+        // @ts-ignore
+        if (typeof e.stopImmediatePropagation === 'function') e.stopImmediatePropagation();
+        e.stopPropagation();
+      }
+    };
+    document.addEventListener('click', onDocClickCapture, true);
+    return () => document.removeEventListener('click', onDocClickCapture, true);
+  }, []);
+
+  const closeModal = (e?: { preventDefault?: () => void; stopPropagation?: () => void }) => {
+    e?.preventDefault?.();
+    e?.stopPropagation?.();
+    setActiveItem(null);
+    // Suppress clicks for a short window to avoid fall-through on mobile
+    suppressClicksUntilRef.current = Date.now() + 500;
+  };
 
   // Lock body scroll on mobile when modal is open
   useEffect(() => {
@@ -972,17 +995,20 @@ const MagicBento: React.FC<BentoProps> = ({
       {activeItem && (
         <div
           className="fixed inset-0 z-[2000] bg-black/70 backdrop-blur-sm flex items-center justify-center p-4"
-          onClick={() => setActiveItem(null)}
+          onMouseDown={(e) => { e.preventDefault(); e.stopPropagation(); }}
+          onClick={(e) => closeModal(e)}
         >
           <div
             className="relative w-full max-w-xl rounded-2xl border border-white/10 p-6 text-white shadow-2xl"
             style={{ background: "linear-gradient(180deg, rgba(20,14,30,0.95), rgba(10,10,18,0.95))" }}
-            onClick={(e) => e.stopPropagation()}
+            onMouseDown={(e) => { e.preventDefault(); e.stopPropagation(); }}
+            onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}
           >
             <button
               aria-label="Close"
               className="absolute top-3 right-3 text-white/70 hover:text-white text-sm"
-              onClick={() => setActiveItem(null)}
+              onMouseDown={(e) => { e.preventDefault(); e.stopPropagation(); }}
+              onClick={(e) => closeModal(e)}
             >
               ✕
             </button>

@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { useEffect, useRef } from 'react';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import About from './pages/About';
@@ -7,6 +8,27 @@ import Events from './pages/Events';
 import Cygnus from './pages/Cygnus';
 
 function App() {
+  // Global ghost-click suppression: ignore synthetic clicks shortly after touch
+  const lastTouchEndRef = useRef<number>(0);
+  useEffect(() => {
+    const onTouchEnd = () => {
+      lastTouchEndRef.current = Date.now();
+    };
+    const onClickCapture = (e: MouseEvent) => {
+      if (Date.now() - lastTouchEndRef.current < 700) {
+        e.preventDefault();
+        // @ts-ignore
+        if (typeof e.stopImmediatePropagation === 'function') e.stopImmediatePropagation();
+        e.stopPropagation();
+      }
+    };
+    document.addEventListener('touchend', onTouchEnd, true);
+    document.addEventListener('click', onClickCapture, true);
+    return () => {
+      document.removeEventListener('touchend', onTouchEnd, true);
+      document.removeEventListener('click', onClickCapture, true);
+    };
+  }, []);
   return (
     <Router>
       <div className="min-h-screen bg-deep-space relative">
