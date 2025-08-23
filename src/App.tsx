@@ -1,5 +1,4 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import About from './pages/About';
@@ -29,11 +28,12 @@ function App() {
         <div className="relative z-10">
           <Navbar />
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Cygnus />} />
+            <Route path="/home" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/members" element={<Members />} />
             <Route path="/events" element={<Events />} />
-            <Route path="/cygnus" element={<Cygnus />} />
+            <Route path="/cygnus" element={<Navigate to="/" replace />} />
           </Routes>
         </div>
       </div>

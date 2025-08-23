@@ -7,11 +7,11 @@ const Navbar: React.FC = () => {
   const location = useLocation();
 
   const navItems = [
-    { path: '/', label: 'Home' },
-    { path: '/cygnus', label: 'Cygnus', isSpecial: true },
+    { path: '/', label: 'Cygnus', isSpecial: true },
+    { path: '/home', label: 'Home' },
     { path: '/about', label: 'About' },
     { path: '/members', label: 'Members' },
-    /*{ path: '/events', label: 'Events' },*/,
+    /* { path: '/events', label: 'Events' }, */
   ];
 
   return (

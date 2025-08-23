@@ -70,6 +70,56 @@ const Cygnus: React.FC = () => {
   const [saberThickness, setSaberThickness] = useState<number>(8);
   const [controlsOpen, setControlsOpen] = useState<boolean>(false);
 
+  // Safe-tap: ignore accidental touch clicks during scroll on mobile
+  const useSafeTap = (onActivate: () => void) => {
+    const startX = React.useRef(0);
+    const startY = React.useRef(0);
+    const moved = React.useRef(false);
+    const isTouch = React.useRef(false);
+
+    const onPointerDown = (e: React.PointerEvent) => {
+      isTouch.current = e.pointerType === 'touch';
+      if (!isTouch.current) return;
+      moved.current = false;
+      startX.current = e.clientX;
+      startY.current = e.clientY;
+    };
+
+    const onPointerMove = (e: React.PointerEvent) => {
+      if (!isTouch.current) return;
+      const dx = Math.abs(e.clientX - startX.current);
+      const dy = Math.abs(e.clientY - startY.current);
+      if (dx > 10 || dy > 10) moved.current = true;
+    };
+
+    const onPointerUp = (e: React.PointerEvent) => {
+      if (!isTouch.current) return;
+      if (moved.current) {
+        e.preventDefault();
+        e.stopPropagation();
+        return;
+      }
+      onActivate();
+    };
+
+    const onClick = (e: React.MouseEvent) => {
+      // If it was a touch that moved, suppress click
+      // @ts-ignore – access native pointerType if available
+      const pt = e.nativeEvent && (e.nativeEvent as any).pointerType;
+      if (pt === 'touch' && moved.current) {
+        e.preventDefault();
+        e.stopPropagation();
+        return;
+      }
+      if (!pt) {
+        // mouse/keyboard
+        onActivate();
+      }
+    };
+
+    return { onPointerDown, onPointerMove, onPointerUp, onClick };
+  };
+
   useEffect(() => {
     const slideshowTimer = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % pastEventImages.length);
@@ -356,13 +406,18 @@ const Cygnus: React.FC = () => {
               </div>
             </motion.div>
 
+            {(() => {
+              const safeTap = useSafeTap(() => window.open('https://forms.gle/UWzYdMZX4ZLA6R869', '_blank'));
+              return (
             <motion.button
-              onClick={() => window.open('https://forms.gle/UWzYdMZX4ZLA6R869', '_blank')}
+              {...safeTap}
               className="bg-gradient-to-r from-yellow-600 to-yellow-800 hover:from-yellow-500 hover:to-yellow-700 text-black font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-full border-2 border-yellow-400 shadow-lg transition-all duration-300 text-base sm:text-lg inline-flex items-center mx-4"
             >
               Register Now
               <ExternalLink className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
             </motion.button>
+              );
+            })()}
 
           </motion.div>
         </div>
@@ -659,7 +714,7 @@ const Cygnus: React.FC = () => {
               viewport={{ once: true }}
               className="text-center lg:text-left"
             >
-              <div className="bg-gradient-to-br from-purple-600/20 to-purple-800/20 border border-purple-400/30 rounded-3xl p-6 sm:p-8 backdrop-blur-sm h-full">
+              <div className="bg-gradient-to-br from-purple-600/20 to-purple-800/20 border border-purple-400/30 rounded-3xl p-6 sm:p-8 backdrop-blur-sm h-full pointer-events-none">
                 <div className="mb-6">
                   <div className="flex items-center justify-center lg:justify-start mb-4">
                     <div className="p-3 bg-purple-500/30 rounded-full mr-3">
@@ -674,15 +729,20 @@ const Cygnus: React.FC = () => {
                 </div>
 
                 <div className="space-y-4">
+                  {(() => {
+                    const safeTap = useSafeTap(() => window.open('https://forms.gle/5shPMTYTw9YFtsxg8', '_blank'));
+                    return (
                   <motion.button
-                    onClick={() => window.open('https://forms.gle/5shPMTYTw9YFtsxg8', '_blank')}
+                    {...safeTap}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="w-full bg-gradient-to-r from-purple-600 to-purple-800 hover:from-purple-500 hover:to-purple-700 text-white font-bold py-4 px-8 rounded-full border-2 border-purple-400 shadow-lg transition-all duration-300 text-base sm:text-lg inline-flex items-center justify-center"
+                    className="w-full bg-gradient-to-r from-purple-600 to-purple-800 hover:from-purple-500 hover:to-purple-700 text-white font-bold py-4 px-8 rounded-full border-2 border-purple-400 shadow-lg transition-all duration-300 text-base sm:text-lg inline-flex items-center justify-center pointer-events-auto"
                   >
                     Join as Community Partner
                     <ExternalLink className="ml-2 w-5 h-5" />
                   </motion.button>
+                    );
+                  })()}
                   
                   <p className="text-purple-300/60 text-xs sm:text-sm text-center">
                     Partnership packages starting from ₹5,000
@@ -699,7 +759,7 @@ const Cygnus: React.FC = () => {
               viewport={{ once: true }}
               className="text-center lg:text-left"
             >
-              <div className="bg-gradient-to-br from-yellow-600/20 to-yellow-800/20 border border-yellow-400/30 rounded-3xl p-6 sm:p-8 backdrop-blur-sm h-full">
+              <div className="bg-gradient-to-br from-yellow-600/20 to-yellow-800/20 border border-yellow-400/30 rounded-3xl p-6 sm:p-8 backdrop-blur-sm h-full pointer-events-none">
                 <div className="mb-6">
                   <div className="flex items-center justify-center lg:justify-start mb-4">
                     <div className="p-3 bg-yellow-500/30 rounded-full mr-3">
@@ -714,15 +774,20 @@ const Cygnus: React.FC = () => {
                 </div>
 
                 <div className="space-y-4">
+                  {(() => {
+                    const safeTap = useSafeTap(() => window.open('https://forms.cloud.microsoft/r/eG72ivrGhH', '_blank'));
+                    return (
                   <motion.button
-                    onClick={() => window.open('https://forms.cloud.microsoft/r/eG72ivrGhH', '_blank')}
+                    {...safeTap}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="w-full bg-gradient-to-r from-yellow-600 to-yellow-800 hover:from-yellow-500 hover:to-yellow-700 text-black font-bold py-4 px-8 rounded-full border-2 border-yellow-400 shadow-lg transition-all duration-300 text-base sm:text-lg inline-flex items-center justify-center"
+                    className="w-full bg-gradient-to-r from-yellow-600 to-yellow-800 hover:from-yellow-500 hover:to-yellow-700 text-black font-bold py-4 px-8 rounded-full border-2 border-yellow-400 shadow-lg transition-all duration-300 text-base sm:text-lg inline-flex items-center justify-center pointer-events-auto"
                   >
                     Join as Sponsor
                     <ExternalLink className="ml-2 w-5 h-5" />
                   </motion.button>
+                    );
+                  })()}
 
                   <p className="text-yellow-300/70 text-xs sm:text-sm text-center">
                     Sponsorship starts from ₹25,000 • Custom tiers available
