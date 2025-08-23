@@ -678,11 +678,45 @@ const MagicBento: React.FC<BentoProps> = ({
       )}
 
       <BentoCardGrid gridRef={gridRef}>
-        <div className="grid gap-3 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="grid grid-flow-dense gap-3 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 auto-rows-[140px] sm:auto-rows-[160px] md:auto-rows-[180px] lg:auto-rows-[200px]">
           {(items && items.length ? items : defaultCardData).map((card, index) => {
-            const baseClassName = `card flex flex-col justify-between relative aspect-[4/3] min-h-[180px] sm:min-h-[200px] w-full max-w-full p-4 sm:p-5 rounded-[20px] border border-solid font-light overflow-hidden transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:shadow-[0_8px_25px_rgba(0,0,0,0.15)] ${
+            // Layout intent (xl):
+            // 0 small (top-left), 1 small (next), 2 large (top-right, spans 2x2),
+            // 3 large (left, spans 2x2 under first row), 4 small (bottom-right left), 5 small (bottom-right right)
+            const isLarge = index === 2 || index === 3;
+            const baseClassName = `card flex flex-col justify-between relative w-full max-w-full p-4 sm:p-5 rounded-[20px] border border-solid font-light overflow-hidden transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:shadow-[0_8px_25px_rgba(0,0,0,0.15)] ${
               enableBorderGlow ? "card--border-glow" : ""
             }`;
+            const sizeClassName = isLarge
+              ? "lg:row-span-2 lg:col-span-2 xl:row-span-2 xl:col-span-2 min-h-[220px] sm:min-h-[260px] lg:min-h-[420px]"
+              : "row-span-1 col-span-1 min-h-[160px] sm:min-h-[180px] lg:min-h-[200px]";
+
+            // Explicit xl placement to match screenshot
+            let placementClass = "";
+            switch (index) {
+              case 0:
+                placementClass = ""; // defaults to first cell
+                break;
+              case 1:
+                placementClass = ""; // flows next to index 0
+                break;
+              case 2:
+                placementClass = "xl:col-start-3 xl:row-start-1";
+                break;
+              case 3:
+                placementClass = "xl:col-start-1 xl:row-start-2";
+                break;
+              case 4:
+                placementClass = "xl:col-start-3 xl:row-start-3";
+                break;
+              case 5:
+                placementClass = "xl:col-start-4 xl:row-start-3";
+                break;
+              default:
+                placementClass = "";
+            }
+
+            const appliedClassName = `${baseClassName} ${sizeClassName} ${placementClass}`;
 
             const cardStyle = {
               backgroundColor: card.color || "var(--background-dark)",
@@ -700,7 +734,7 @@ const MagicBento: React.FC<BentoProps> = ({
               return (
                 <ParticleCard
                   key={index}
-                  className={baseClassName}
+                  className={appliedClassName}
                   style={cardStyle}
                   disableAnimations={shouldDisableAnimations}
                   particleCount={particleCount}
@@ -737,7 +771,7 @@ const MagicBento: React.FC<BentoProps> = ({
             return (
               <div
                 key={index}
-                className={baseClassName}
+                className={appliedClassName}
                 style={cardStyle}
                 ref={(el) => {
                   if (!el) return;
