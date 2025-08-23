@@ -98,18 +98,20 @@ const Cygnus: React.FC = () => {
           </motion.div>
         )}
       </AnimatePresence>
+      
       <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="mt-8 sm:mt-8 px-4"
-            >
-              <img 
-                src="/assets/unnamed.png" 
-                alt="Cygnus Rebellion" 
-                className="rounded-2xl shadow-2xl mx-auto w-full max-w-4xl h-auto" 
-              />
-            </motion.div>
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.4 }}
+        className="mt-8 sm:mt-8 px-4"
+      >
+        <img 
+          src="/assets/unnamed.png" 
+          alt="Cygnus Rebellion" 
+          className="rounded-2xl shadow-2xl mx-auto w-full max-w-4xl h-auto" 
+        />
+      </motion.div>
+
       {/* Hero Section */}
       <section className="relative z-10 py-10 sm:py-20 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto text-center">
@@ -154,6 +156,30 @@ const Cygnus: React.FC = () => {
               </div>
             </div>
 
+            {/* Early Bird Discount Section */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="mb-8 sm:mb-12"
+            >
+              <div className="inline-block border border-w rounded-2xl p-4 sm:p-6 backdrop-blur-sm">
+                <div className="text-center">
+                  <div className="flex items-center justify-center mb-2">
+                    <Zap className="w-5 h-5 sm:w-6 sm:h-6 text-white mr-2 animate-pulse" />
+                    <span className="text-white font-bold text-sm sm:text-base uppercase tracking-wide">Early Bird Special</span>
+                  </div>
+                  <p className="text-2xl sm:text-3xl font-bold text-white mb-1">
+                    <span className="text-white line-through text-lg sm:text-xl mr-2">₹200</span>
+                    <span className="text-yellow-400">₹150</span>
+                  </p>
+                  <p className="text-xs sm:text-sm text-white/70">
+                    Save 25% • For First 100 participants
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+
             <motion.button
               onClick={() => setShowPopup(true)}
               className="bg-gradient-to-r from-yellow-600 to-yellow-800 hover:from-yellow-500 hover:to-yellow-700 text-black font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-full border-2 border-yellow-400 shadow-lg transition-all duration-300 text-base sm:text-lg inline-flex items-center mx-4"
@@ -161,7 +187,6 @@ const Cygnus: React.FC = () => {
               Join the Rebellion
               <ExternalLink className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
             </motion.button>
-
 
           </motion.div>
         </div>
@@ -351,6 +376,108 @@ const Cygnus: React.FC = () => {
                 </div>
               </ScrollStackItem>
             </ScrollStack>
+          </div>
+        </div>
+      </section>
+
+      {/* Community Partners Section */}
+      <section className="relative z-10 py-12 sm:py-20 px-4 sm:px-6 bg-gradient-to-br from-purple-900/20 to-black/50">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center mb-8 sm:mb-12"
+          >
+            <h2 className="text-2xl sm:text-4xl font-bold text-white mb-4 sm:mb-6">
+              Join Our Galactic Alliance
+            </h2>
+            <p className="text-base sm:text-lg text-white/70 max-w-3xl mx-auto mb-8 sm:mb-10">
+              Partner with us to empower the next generation of innovators. As a community partner, 
+              you'll be at the forefront of technological advancement and talent discovery.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center">
+            {/* Partner Benefits */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="space-y-6"
+            >
+              <h3 className="text-xl sm:text-2xl font-bold text-white mb-6">
+                Partnership Benefits
+              </h3>
+              
+              <div className="flex items-start space-x-4">
+                <div className="p-2 bg-purple-500/20 rounded-full flex-shrink-0 mt-1">
+                  <Users className="w-5 h-5 text-purple-400" />
+                </div>
+                <div>
+                  <h4 className="text-lg font-semibold text-white mb-2">Talent Discovery</h4>
+                  <p className="text-white/70 text-sm sm:text-base">
+                    Connect with 500+ brilliant minds and identify future tech leaders for your organization.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start space-x-4">
+                <div className="p-2 bg-purple-500/20 rounded-full flex-shrink-0 mt-1">
+                  <Zap className="w-5 h-5 text-purple-400" />
+                </div>
+                <div>
+                  <h4 className="text-lg font-semibold text-white mb-2">Brand Visibility</h4>
+                  <p className="text-white/70 text-sm sm:text-base">
+                    Showcase your brand to a highly engaged tech-savvy audience across multiple platforms.
+                  </p>
+                </div>
+              </div>
+
+
+            </motion.div>
+
+            {/* CTA Section */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              viewport={{ once: true }}
+              className="text-center lg:text-left"
+            >
+              <div className="bg-gradient-to-br from-purple-600/20 to-purple-800/20 border border-purple-400/30 rounded-3xl p-6 sm:p-8 backdrop-blur-sm">
+                <div className="mb-6">
+                  <div className="flex items-center justify-center lg:justify-start mb-4">
+                    <div className="p-3 bg-purple-500/30 rounded-full mr-3">
+                      <Star className="w-8 h-8 text-purple-400" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-white">Become a Partner</h3>
+                  </div>
+                  <p className="text-white/70 mb-6 text-sm sm:text-base">
+                    Join leading organizations in supporting the next generation of tech innovators. 
+                    Let's build the future together.
+                  </p>
+                </div>
+
+                <div className="space-y-4">
+                  <motion.button
+                    onClick={() => setShowPopup(true)}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="w-full bg-gradient-to-r from-purple-600 to-purple-800 hover:from-purple-500 hover:to-purple-700 text-white font-bold py-4 px-8 rounded-full border-2 border-purple-400 shadow-lg transition-all duration-300 text-base sm:text-lg inline-flex items-center justify-center"
+                  >
+                    Join as Community Partner
+                    <ExternalLink className="ml-2 w-5 h-5" />
+                  </motion.button>
+                  
+                  <p className="text-purple-300/60 text-xs sm:text-sm text-center">
+                    Partnership packages starting from ₹5,000
+                  </p>
+                </div>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
