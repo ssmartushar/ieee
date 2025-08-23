@@ -667,6 +667,11 @@ const MagicBento: React.FC<BentoProps> = ({
     };
   }, [activeItem, isMobile]);
 
+  // Hide on smaller mobile screens without breaking hook order
+  if (isMobile) {
+    return null;
+  }
+
   return (
     <>
       <style>
