@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Calendar, Clock, MapPin, Users, Trophy, Code, Zap, Brain, Gamepad2, ExternalLink, Star, ChevronRight, X } from 'lucide-react';
+import { Calendar, Clock, MapPin, Users, Trophy, Code, Zap, Brain, Gamepad2, ExternalLink, Star, ChevronRight, X, Mail, Phone } from 'lucide-react';
 import ScrollStack, { ScrollStackItem } from '../components/ScrollStack';
 const MagicBento = React.lazy(() => import('../components/MagicBento'));
 import LightsaberCursor from '../components/LightsaberCursor';
@@ -933,6 +933,144 @@ const Cygnus: React.FC = () => {
           </div>
         </section>
 
+        {/* Contact Us Section */}
+        <section className="relative z-10 py-12 sm:py-20 px-4 sm:px-6">
+          <div className="max-w-7xl mx-auto">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="text-2xl sm:text-4xl font-bold text-center mb-8 sm:mb-14 text-yellow-400 tracking-wide"
+            >
+              Contact <span className="text-white">Us</span>
+            </motion.h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-10">
+              {/* Chapter Chair */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true }}
+                className="flex items-center bg-gradient-to-br from-yellow-700/70 to-yellow-900/80 border border-yellow-400/30 rounded-2xl p-5 sm:p-7 shadow-lg"
+              >
+                <div className="flex-shrink-0 mr-4">
+                  <Users className="w-8 h-8 text-yellow-400" />
+                </div>
+                <div>
+                  <div className="font-bold text-white text-lg mb-1">Chapter Chair</div>
+                  <div className="text-yellow-300 font-semibold mb-1">Bharat Jambhulkar</div>
+                  <div className="flex items-center text-white/80 text-sm mb-1">
+                    <Mail className="w-4 h-4 mr-2 text-yellow-400" />
+                    <a href="mailto:bharatjambhulkar358@gmail.com" className="hover:underline">
+                      bharatjambhulkar358@gmail.com
+                    </a>
+                  </div>
+                  <div className="flex items-center text-white/80 text-sm">
+                    <Phone className="w-4 h-4 mr-2 text-yellow-400" />
+                    <a href="tel:+919168675745" className="hover:underline">
+                      +91 9168675745
+                    </a>
+                  </div>
+                </div>
+              </motion.div>
+              {/* Vice Chair */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                viewport={{ once: true }}
+                className="flex items-center bg-gradient-to-br from-purple-700/70 to-purple-900/80 border border-purple-400/30 rounded-2xl p-5 sm:p-7 shadow-lg"
+              >
+                <div className="flex-shrink-0 mr-4">
+                  <Users className="w-8 h-8 text-purple-300" />
+                </div>
+                <div>
+                  <div className="font-bold text-white text-lg mb-1">Vice Chair</div>
+                  <div className="text-purple-200 font-semibold mb-1">Vaibhavi Mangrulkar</div>
+                  <div className="flex items-center text-white/80 text-sm mb-1">
+                    <Mail className="w-4 h-4 mr-2 text-purple-300" />
+                    <a href="mailto:vaibhavimangrulkar00@gmail.com" className="hover:underline">
+                      vaibhavimangrulkar00@gmail.com
+                    </a>
+                  </div>
+                  <div className="flex items-center text-white/80 text-sm">
+                    <Phone className="w-4 h-4 mr-2 text-purple-300" />
+                    <a href="tel:+918767886827" className="hover:underline">
+                      +91 8767886827
+                    </a>
+                  </div>
+                </div>
+              </motion.div>
+              {/* Secretary */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                viewport={{ once: true }}
+                className="flex items-center bg-gradient-to-br from-teal-700/70 to-teal-900/80 border border-teal-400/30 rounded-2xl p-5 sm:p-7 shadow-lg"
+              >
+                <div className="flex-shrink-0 mr-4">
+                  <Users className="w-8 h-8 text-teal-300" />
+                </div>
+                <div>
+                  <div className="font-bold text-white text-lg mb-1">Secretary</div>
+                  <div className="text-teal-200 font-semibold mb-1">Rutuja Langde</div>
+                  <div className="flex items-center text-white/80 text-sm mb-1">
+                    <Mail className="w-4 h-4 mr-2 text-teal-300" />
+                    <a href="mailto:rulangde@gmail.com" className="hover:underline">
+                      rulangde@gmail.com
+                    </a>
+                  </div>
+                  <div className="flex items-center text-white/80 text-sm">
+                    <Phone className="w-4 h-4 mr-2 text-teal-300" />
+                    <a href="tel:+919699101120" className="hover:underline">
+                      +91 9699101120
+                    </a>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+            {/* Social Links */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10 mt-8">
+              <a
+                href="https://www.linkedin.com/company/ieee-computer-society-ghrce"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-white/80 hover:text-yellow-400 transition"
+              >
+                <svg width="22" height="22" fill="currentColor" className="text-blue-400" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.268c-.966 0-1.75-.784-1.75-1.75s.784-1.75 1.75-1.75 1.75.784 1.75 1.75-.784 1.75-1.75 1.75zm13.5 11.268h-3v-5.604c0-1.337-.026-3.063-1.867-3.063-1.868 0-2.154 1.459-2.154 2.967v5.7h-3v-10h2.881v1.367h.041c.401-.761 1.379-1.563 2.838-1.563 3.036 0 3.6 2 3.6 4.594v5.602z"/></svg>
+                <span className="text-sm font-medium">ieee-computer-society-ghrce</span>
+              </a>
+              <a
+                href="mailto:ieeecs@raisoni.net"
+                className="flex items-center gap-2 text-white/80 hover:text-yellow-400 transition"
+              >
+                <Mail className="w-5 h-5 text-red-400" />
+                <span className="text-sm font-medium">ieeecs@raisoni.net</span>
+              </a>
+              <a
+                href="https://www.ieeecsghrce.in/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-white/80 hover:text-yellow-400 transition"
+              >
+                <ExternalLink className="w-5 h-5 text-yellow-400" />
+                <span className="text-sm font-medium">ieeecsghrce.in</span>
+              </a>
+              <a
+                href="https://www.instagram.com/ieee_cs_ghrce"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-white/80 hover:text-yellow-400 transition"
+              >
+                <svg width="22" height="22" fill="currentColor" className="text-pink-400" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.334 3.608 1.309.975.975 1.247 2.242 1.309 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.334 2.633-1.309 3.608-.975.975-2.242 1.247-3.608 1.309-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.334-3.608-1.309-.975-.975-1.247-2.242-1.309-3.608-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.062-1.366.334-2.633 1.309-3.608.975-.975 2.242-1.247 3.608-1.309 1.266-.058 1.646-.07 4.85-.07zm0-2.163c-3.259 0-3.667.012-4.947.07-1.276.058-2.687.334-3.678 1.325-.991.991-1.267 2.402-1.325 3.678-.058 1.28-.07 1.688-.07 4.947s.012 3.667.07 4.947c.058 1.276.334 2.687 1.325 3.678.991.991 2.402 1.267 3.678 1.325 1.28.058 1.688.07 4.947.07s3.667-.012 4.947-.07c1.276-.058 2.687-.334 3.678-1.325.991-.991 1.267-2.402 1.325-3.678.058-1.28.07-1.688.07-4.947s-.012-3.667-.07-4.947c-.058-1.276-.334-2.687-1.325-3.678-.991-.991-2.402-1.267-3.678-1.325-1.28-.058-1.688-.07-4.947-.07zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm0 10.162a3.999 3.999 0 1 1 0-7.998 3.999 3.999 0 0 1 0 7.998zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+                <span className="text-sm font-medium">Instagram</span>
+              </a>
+            </div>
+          </div>
+        </section>
+
         {/* Past Event Glimpses */}
         <section className="relative z-10 py-12 sm:py-20 px-4 sm:px-6">
           <div className="max-w-7xl mx-auto">
@@ -1025,6 +1163,185 @@ const Cygnus: React.FC = () => {
             </div>
           </div>
         </section>
+
+        {/* Contact Us Section */}
+        <section className="relative z-10 py-12 sm:py-20 px-4 sm:px-6">
+          <div className="max-w-7xl mx-auto">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="text-2xl sm:text-4xl font-bold text-center mb-8 sm:mb-14 text-yellow-400 tracking-wide"
+            >
+              Contact <span className="text-white">Us</span>
+            </motion.h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-10">
+              {/* Chapter Chair */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true }}
+                className="flex items-center bg-gradient-to-br from-yellow-700/70 to-yellow-900/80 border border-yellow-400/30 rounded-2xl p-5 sm:p-7 shadow-lg"
+              >
+                <div className="flex-shrink-0 mr-4">
+                  <Users className="w-8 h-8 text-yellow-400" />
+                </div>
+                <div>
+                  <div className="font-bold text-white text-lg mb-1">Chapter Chair</div>
+                  <div className="text-yellow-300 font-semibold mb-1">Bharat Jambhulkar</div>
+                  <div className="flex items-center text-white/80 text-sm mb-1">
+                    <Mail className="w-4 h-4 mr-2 text-yellow-400" />
+                    <a href="mailto:bharatjambhulkar358@gmail.com" className="hover:underline">
+                      bharatjambhulkar358@gmail.com
+                    </a>
+                  </div>
+                  <div className="flex items-center text-white/80 text-sm">
+                    <Phone className="w-4 h-4 mr-2 text-yellow-400" />
+                    <a href="tel:+919168675745" className="hover:underline">
+                      +91 9168675745
+                    </a>
+                  </div>
+                </div>
+              </motion.div>
+              {/* Vice Chair */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                viewport={{ once: true }}
+                className="flex items-center bg-gradient-to-br from-purple-700/70 to-purple-900/80 border border-purple-400/30 rounded-2xl p-5 sm:p-7 shadow-lg"
+              >
+                <div className="flex-shrink-0 mr-4">
+                  <Users className="w-8 h-8 text-purple-300" />
+                </div>
+                <div>
+                  <div className="font-bold text-white text-lg mb-1">Vice Chair</div>
+                  <div className="text-purple-200 font-semibold mb-1">Vaibhavi Mangrulkar</div>
+                  <div className="flex items-center text-white/80 text-sm mb-1">
+                    <Mail className="w-4 h-4 mr-2 text-purple-300" />
+                    <a href="mailto:vaibhavimangrulkar00@gmail.com" className="hover:underline">
+                      vaibhavimangrulkar00@gmail.com
+                    </a>
+                  </div>
+                  <div className="flex items-center text-white/80 text-sm">
+                    <Phone className="w-4 h-4 mr-2 text-purple-300" />
+                    <a href="tel:+918767886827" className="hover:underline">
+                      +91 8767886827
+                    </a>
+                  </div>
+                </div>
+              </motion.div>
+              {/* Secretary */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                viewport={{ once: true }}
+                className="flex items-center bg-gradient-to-br from-teal-700/70 to-teal-900/80 border border-teal-400/30 rounded-2xl p-5 sm:p-7 shadow-lg"
+              >
+                <div className="flex-shrink-0 mr-4">
+                  <Users className="w-8 h-8 text-teal-300" />
+                </div>
+                <div>
+                  <div className="font-bold text-white text-lg mb-1">Secretary</div>
+                  <div className="text-teal-200 font-semibold mb-1">Rutuja Langde</div>
+                  <div className="flex items-center text-white/80 text-sm mb-1">
+                    <Mail className="w-4 h-4 mr-2 text-teal-300" />
+                    <a href="mailto:rulangde@gmail.com" className="hover:underline">
+                      rulangde@gmail.com
+                    </a>
+                  </div>
+                  <div className="flex items-center text-white/80 text-sm">
+                    <Phone className="w-4 h-4 mr-2 text-teal-300" />
+                    <a href="tel:+919699101120" className="hover:underline">
+                      +91 9699101120
+                    </a>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+            {/* Social Links */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10 mt-8">
+              <a
+                href="https://www.linkedin.com/company/ieee-computer-society-ghrce"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-white/80 hover:text-yellow-400 transition"
+              >
+                <svg width="22" height="22" fill="currentColor" className="text-blue-400" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.268c-.966 0-1.75-.784-1.75-1.75s.784-1.75 1.75-1.75 1.75.784 1.75 1.75-.784 1.75-1.75 1.75zm13.5 11.268h-3v-5.604c0-1.337-.026-3.063-1.867-3.063-1.868 0-2.154 1.459-2.154 2.967v5.7h-3v-10h2.881v1.367h.041c.401-.761 1.379-1.563 2.838-1.563 3.036 0 3.6 2 3.6 4.594v5.602z"/></svg>
+                <span className="text-sm font-medium">ieee-computer-society-ghrce</span>
+              </a>
+              <a
+                href="mailto:ieeecs@raisoni.net"
+                className="flex items-center gap-2 text-white/80 hover:text-yellow-400 transition"
+              >
+                <Mail className="w-5 h-5 text-red-400" />
+                <span className="text-sm font-medium">ieeecs@raisoni.net</span>
+              </a>
+              <a
+                href="https://www.ieeecsghrce.in/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-white/80 hover:text-yellow-400 transition"
+              >
+                <ExternalLink className="w-5 h-5 text-yellow-400" />
+                <span className="text-sm font-medium">ieeecsghrce.in</span>
+              </a>
+              <a
+                href="https://www.instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-white/80 hover:text-yellow-400 transition"
+              >
+                <svg width="22" height="22" fill="currentColor" className="text-pink-400" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.334 3.608 1.309.975.975 1.247 2.242 1.309 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.334 2.633-1.309 3.608-.975.975-2.242 1.247-3.608 1.309-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.334-3.608-1.309-.975-.975-1.247-2.242-1.309-3.608-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.062-1.366.334-2.633 1.309-3.608.975-.975 2.242-1.247 3.608-1.309 1.266-.058 1.646-.07 4.85-.07zm0-2.163c-3.259 0-3.667.012-4.947.07-1.276.058-2.687.334-3.678 1.325-.991.991-1.267 2.402-1.325 3.678-.058 1.28-.07 1.688-.07 4.947s.012 3.667.07 4.947c.058 1.276.334 2.687 1.325 3.678.991.991 2.402 1.267 3.678 1.325 1.28.058 1.688.07 4.947.07s3.667-.012 4.947-.07c1.276-.058 2.687-.334 3.678-1.325.991-.991 1.267-2.402 1.325-3.678.058-1.28.07-1.688.07-4.947s-.012-3.667-.07-4.947c-.058-1.276-.334-2.687-1.325-3.678-.991-.991-2.402-1.267-3.678-1.325-1.28-.058-1.688-.07-4.947-.07zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm0 10.162a3.999 3.999 0 1 1 0-7.998 3.999 3.999 0 0 1 0 7.998zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+                <span className="text-sm font-medium">Instagram</span>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* Footer */}
+        <footer className="relative z-10 py-8 sm:py-12 px-4 sm:px-6 bg-black">
+          <div className="max-w-7xl mx-auto text-center">
+            <p className="text-sm sm:text-base text-white/70 mb-4">
+              &copy; {new Date().getFullYear()} IEEE CS SBC GHRCE. All rights reserved.
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8">
+              <a
+                href="https://www.linkedin.com/company/ieee-computer-society-ghrce"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/70 hover:text-yellow-400 transition"
+              >
+                LinkedIn
+              </a>
+              <a
+                href="mailto:ieeecs@raisoni.net"
+                className="text-white/70 hover:text-yellow-400 transition"
+              >
+                Email
+              </a>
+              <a
+                href="https://www.ieeecsghrce.in/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/70 hover:text-yellow-400 transition"
+              >
+                Website
+              </a>
+              <a
+                href="https://www.instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/70 hover:text-yellow-400 transition"
+              >
+                Instagram
+              </a>
+            </div>
+          </div>
+        </footer>
       </div>
     </>
   );
