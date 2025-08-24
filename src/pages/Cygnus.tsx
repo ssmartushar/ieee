@@ -1104,6 +1104,66 @@ const Cygnus: React.FC = () => {
           </div>
         </section>
 
+        {/* Event Info Section */}
+        <section className="relative z-10 py-12 sm:py-20 px-4 sm:px-6 bg-gradient-to-br from-yellow-900/20 to-black/50 backdrop-blur-sm">
+          <div className="max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true }}
+                className="text-center group p-4 sm:p-6 bg-black/20 rounded-xl sm:bg-transparent sm:p-0"
+              >
+                <div className="relative mb-4">
+                  <MapPin className="w-10 h-10 sm:w-12 sm:h-12 text-yellow-400 mx-auto mb-3 sm:mb-4" />
+                  <Star className="w-4 h-4 sm:w-6 sm:h-6 text-white/30 fill-current absolute -top-1 -right-1 sm:-top-2 sm:-right-2 transition-colors" />
+                </div>
+                <h3 className="text-lg sm:text-xl font-bold text-white mb-2">Cosmic Venue</h3>
+                <p className="text-sm sm:text-base text-white/70 leading-relaxed">
+                  G.H. Raisoni College of Engineering<br />
+                  Nagpur, Maharashtra
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                viewport={{ once: true }}
+                className="text-center group p-4 sm:p-6 bg-black/20 rounded-xl sm:bg-transparent sm:p-0"
+              >
+                <div className="relative mb-4">
+                  <Users className="w-10 h-10 sm:w-12 sm:h-12 text-yellow-400 mx-auto mb-3 sm:mb-4" />
+                  <Star className="w-4 h-4 sm:w-6 sm:h-6 text-white/30 fill-current absolute -top-1 -right-1 sm:-top-2 sm:-right-2 transition-colors" />
+                </div>
+                <h3 className="text-lg sm:text-xl font-bold text-white mb-2">Star Navigators</h3>
+                <p className="text-sm sm:text-base text-white/70 leading-relaxed">
+                  500+ Past Participants<br />
+                  A 2-Day Extravaganza
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                viewport={{ once: true }}
+                className="text-center group p-4 sm:p-6 bg-black/20 rounded-xl sm:bg-transparent sm:p-0 sm:col-span-2 lg:col-span-1"
+              >
+                <div className="relative mb-4">
+                  <Trophy className="w-10 h-10 sm:w-12 sm:h-12 text-yellow-400 mx-auto mb-3 sm:mb-4" />
+                  <Star className="w-4 h-4 sm:w-6 sm:h-6 text-white/30 fill-current absolute -top-1 -right-1 sm:-top-2 sm:-right-2 transition-colors" />
+                </div>
+                <h3 className="text-lg sm:text-xl font-bold text-white mb-2">Galactic Rewards</h3>
+                <p className="text-sm sm:text-base text-white/70 leading-relaxed">
+                  Prize Pool of over ₹10,000
+                </p>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
         {/* Footer */}
         <footer className="relative z-10 py-8 sm:py-12 px-4 sm:px-6 bg-black">
           <div className="max-w-7xl mx-auto text-center">
