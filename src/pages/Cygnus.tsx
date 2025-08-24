@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Calendar, Clock, MapPin, Users, Trophy, Code, Zap, Brain, Gamepad2, ExternalLink, Star, ChevronRight, X } from 'lucide-react';
 import ScrollStack, { ScrollStackItem } from '../components/ScrollStack';
-import MagicBento from '../components/MagicBento';
+const MagicBento = React.lazy(() => import('../components/MagicBento'));
 import LightsaberCursor from '../components/LightsaberCursor';
 import SEO from '../components/SEO';
 
@@ -334,8 +334,11 @@ const Cygnus: React.FC = () => {
         className="mt-8 sm:mt-8 px-4"
       >
         <img 
-          src="/assets/unnamed.png" 
+          src="/assets/unnamed.webp" 
           alt="Cygnus Rebellion" 
+          loading="lazy"
+          width="1200" 
+          height="400" 
           className="rounded-2xl shadow-2xl mx-auto w-full max-w-4xl h-auto" 
         />
       </motion.div>
@@ -428,7 +431,7 @@ const Cygnus: React.FC = () => {
 
       {/* About Cygnus Section */}
       <section className="relative z-10 py-12 sm:py-20 px-4 sm:px-6 bg-black">
-        <div className="max-w-7xl mx-auto glass-card bg-transparent-black p-6 sm:p-8 md:p-12 rounded-3xl">
+        <div className="max-w-7xl mx-auto  glass-card bg-transparent-black p-6 sm:p-8 md:p-12 rounded-3xl">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -633,57 +636,59 @@ const Cygnus: React.FC = () => {
             Learn More — Hover to Reveal
           </motion.h3>
           <div className="w-full flex justify-center">
-            <MagicBento
-              enableTilt={false}
-              enableMagnetism={true}
-              enableSpotlight={true}
-              enableBorderGlow={true}
-              glowColor="255, 211, 0"
-              items={[
-              {
-                label: 'Goal',
-                title: 'Goals of Cygnus',
-                description:
-                  'Facilitate meaningful networking between students, industry professionals, peers, and mentors to build lasting relationships; and promote practical learning through hands‑on activities and real‑world challenges that bridge theory with application.',
-                color: '#0a0f12'
-              },
-              {
-                label: 'Our Mission',
-                title: 'Our Mission',
-                description:
-                  'Build a collaborative ecosystem for students, professionals, and enthusiasts to exchange ideas, inspire innovation, and grow together.',
-                color: '#0a0f12'
-              },
-              {
-                label: 'Bridge the Gap',
-                title: 'Academia ↔ Industry',
-                description:
-                  'Industry experts, real challenges, and practical exposure ensure concepts are applied meaningfully, preparing participants to transition smoothly from classroom learning to industry expectations.',
-                color: '#0a0f12'
-              },
-              {
-                label: 'Empowerment',
-                title: 'Beyond Theory',
-                description:
-                  'Workshops, hackathons, and guided tracks build practical skills, sharpen problem‑solving, and grow confidence—empowering you to ship ideas and lead teams.',
-                color: '#0a0f12'
-              },
-              {
-                label: 'Impact',
-                title: 'Community Impact',
-                description:
-                  'Boost engagement and exposure by amplifying hackathon participation and elevating awareness of IEEE CS programs and benefits; nurture lasting confidence so the experience inspires growth long after the lights dim.',
-                color: '#0a0a10'
-              },
-              {
-                label: 'Elevate',
-                title: 'Elevate Highlights',
-                description:
-                  'A power‑packed Elevate experience—real challenges, expert mentors, quizzes, sessions, late‑night jamming, and goodies—made 2024 unforgettable and enriching with sharpened skills, stronger networks, and vibrant community energy.',
-                color: '#0b0b12'
-              },
-              ]}
-            />
+            <React.Suspense fallback={<div>Loading...</div>}>
+              <MagicBento
+                enableTilt={false}
+                enableMagnetism={true}
+                enableSpotlight={true}
+                enableBorderGlow={true}
+                glowColor="255, 211, 0"
+                items={[
+                {
+                  label: 'Goal',
+                  title: 'Goals of Cygnus',
+                  description:
+                    'Facilitate meaningful networking between students, industry professionals, peers, and mentors to build lasting relationships; and promote practical learning through hands‑on activities and real‑world challenges that bridge theory with application.',
+                  color: '#0a0f12'
+                },
+                {
+                  label: 'Our Mission',
+                  title: 'Our Mission',
+                  description:
+                    'Build a collaborative ecosystem for students, professionals, and enthusiasts to exchange ideas, inspire innovation, and grow together.',
+                  color: '#0a0f12'
+                },
+                {
+                  label: 'Bridge the Gap',
+                  title: 'Academia ↔ Industry',
+                  description:
+                    'Industry experts, real challenges, and practical exposure ensure concepts are applied meaningfully, preparing participants to transition smoothly from classroom learning to industry expectations.',
+                  color: '#0a0f12'
+                },
+                {
+                  label: 'Empowerment',
+                  title: 'Beyond Theory',
+                  description:
+                    'Workshops, hackathons, and guided tracks build practical skills, sharpen problem‑solving, and grow confidence—empowering you to ship ideas and lead teams.',
+                  color: '#0a0f12'
+                },
+                {
+                  label: 'Impact',
+                  title: 'Community Impact',
+                  description:
+                    'Boost engagement and exposure by amplifying hackathon participation and elevating awareness of IEEE CS programs and benefits; nurture lasting confidence so the experience inspires growth long after the lights dim.',
+                  color: '#0a0f10'
+                },
+                {
+                  label: 'Elevate',
+                  title: 'Elevate Highlights',
+                  description:
+                    'A power‑packed Elevate experience—real challenges, expert mentors, quizzes, sessions, late‑night jamming, and goodies—made 2024 unforgettable and enriching with sharpened skills, stronger networks, and vibrant community energy.',
+                  color: '#0b0b12'
+                },
+                ]}
+              />
+            </React.Suspense>
           </div>
         </div>
       </section>
@@ -910,7 +915,7 @@ const Cygnus: React.FC = () => {
 
       {/* Past Event Glimpses */}
       <section className="relative z-10 py-12 sm:py-20 px-4 sm:px-6">
-        <div className="max-w-7xl mx-auto">
+         <div className="max-w-7xl mx-auto">
           <motion.h2
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -927,6 +932,9 @@ const Cygnus: React.FC = () => {
                 key={currentImageIndex}
                 src={pastEventImages[currentImageIndex]}
                 alt={`Past Event Image ${currentImageIndex + 1}`}
+                loading="lazy"
+                width="800"
+                height="400"
                 initial={{ opacity: 0, x: 300 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -300 }}
