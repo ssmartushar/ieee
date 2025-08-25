@@ -25,6 +25,7 @@ interface CygnusEvent {
 
 const Cygnus: React.FC = () => {
   const [showPopup, setShowPopup] = useState(false);
+  const [showRegisterModal, setShowRegisterModal] = useState(false); // <-- Add modal state
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -160,6 +161,60 @@ const Cygnus: React.FC = () => {
         image="/assets/unnamed.png"
       />
       <div className="pt-8 sm:pt-16 min-h-screen bg-black overflow-x-hidden relative">
+        {/* Register Modal */}
+        <AnimatePresence>
+          {showRegisterModal && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-[2147483647] px-4"
+            >
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                className="bg-[#191919] border border-yellow-400/50 rounded-lg p-6 sm:p-8 text-center shadow-2xl max-w-sm w-full"
+              >
+                <h3 className="text-xl sm:text-2xl font-bold text-yellow-400 mb-4">Register for Cygnus</h3>
+                <p className="text-white/80 mb-6 text-sm sm:text-base">
+                  Please confirm that you wish to proceed to registration.<br />
+                  <span className="block mt-2 text-yellow-300 font-semibold">Terms and conditions apply.</span>
+                </p>
+                <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 w-full">
+                  <button
+                    onPointerDown={e => {
+                      // Only handle touch on mobile
+                      if (e.pointerType === 'touch') {
+                        setShowRegisterModal(false);
+                      }
+                    }}
+                    onClick={() => setShowRegisterModal(false)}
+                    className="bg-black border border-yellow-400/40 text-yellow-300 px-5 py-2 rounded-full font-semibold shadow hover:bg-yellow-900/30 hover:text-yellow-200 transition-all duration-200 w-full sm:w-auto"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onPointerDown={e => {
+                      if (e.pointerType === 'touch') {
+                        window.open('https://docs.google.com/forms/d/e/1FAIpQLSdQkCt6Y5xWZQ3BWE7o9ZdR4-0Dl7hKjhDU9qtQdz1BR0CNuw/viewform', '_blank');
+                        setShowRegisterModal(false);
+                      }
+                    }}
+                    onClick={e => {
+                      window.open('https://docs.google.com/forms/d/e/1FAIpQLSdQkCt6Y5xWZQ3BWE7o9ZdR4-0Dl7hKjhDU9qtQdz1BR0CNuw/viewform', '_blank');
+                      setShowRegisterModal(false);
+                    }}
+                    className="bg-gradient-to-r from-yellow-600 to-yellow-800 text-black px-5 py-2 rounded-full font-semibold shadow hover:from-yellow-500 hover:to-yellow-700 hover:scale-105 transition-all duration-200 w-full sm:w-auto"
+                  >
+                    Confirm
+                  </button>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
         {/* Corner glow overlay matching saber color */}
         <div
           className="pointer-events-none fixed inset-0"
@@ -412,10 +467,12 @@ const Cygnus: React.FC = () => {
               </motion.div>
 
               {(() => {
-                const safeTap = useSafeTap(() => window.open('https://forms.gle/UWzYdMZX4ZLA6R869', '_blank'));
+                const safeTap = useSafeTap(() => setShowRegisterModal(true));
                 return (
                   <motion.button
                     {...safeTap}
+                    whileTap={{ scale: 0.95 }}
+                    whileHover={{ scale: 1.05 }}
                     className="bg-gradient-to-r from-yellow-600 to-yellow-800 hover:from-yellow-500 hover:to-yellow-700 text-black font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-full border-2 border-yellow-400 shadow-lg transition-all duration-300 text-base sm:text-lg inline-flex items-center mx-4"
                   >
                     Register Now
@@ -1064,7 +1121,7 @@ const Cygnus: React.FC = () => {
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-white/80 hover:text-yellow-400 transition"
               >
-                <svg width="22" height="22" fill="currentColor" className="text-pink-400" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.334 3.608 1.309.975.975 1.247 2.242 1.309 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.334 2.633-1.309 3.608-.975.975-2.242 1.247-3.608 1.309-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.334-3.608-1.309-.975-.975-1.247-2.242-1.309-3.608-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.062-1.366.334-2.633 1.309-3.608.975-.975 2.242-1.247 3.608-1.309 1.266-.058 1.646-.07 4.85-.07zm0-2.163c-3.259 0-3.667.012-4.947.07-1.276.058-2.687.334-3.678 1.325-.991.991-1.267 2.402-1.325 3.678-.058 1.28-.07 1.688-.07 4.947s.012 3.667.07 4.947c.058 1.276.334 2.687 1.325 3.678.991.991 2.402 1.267 3.678 1.325 1.28.058 1.688.07 4.947.07s3.667-.012 4.947-.07c1.276-.058 2.687-.334 3.678-1.325.991-.991 1.267-2.402 1.325-3.678.058-1.28.07-1.688.07-4.947s-.012-3.667-.07-4.947c-.058-1.276-.334-2.687-1.325-3.678-.991-.991-2.402-1.267-3.678-1.325-1.28-.058-1.688-.07-4.947-.07zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm0 10.162a3.999 3.999 0 1 1 0-7.998 3.999 3.999 0 0 1 0 7.998zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+                <svg width="22" height="22" fill="currentColor" className="text-pink-400" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.334 3.608 1.309.975.975 1.247 2.242 1.309 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.334 2.633-1.309 3.608-.975.975-2.242 1.247-3.608 1.309-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.334-3.608-1.309-.975-.975-1.247-2.242-1.309-3.608-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.062-1.366.334-2.633 1.309-3.608.975-.975 2.242-1.247 3.608-1.309 1.266-.058 1.646-.07 4.85-.07zm0-2.163c-3.259 0-3.667.012-4.947.07-1.276.058-2.687.334-3.678 1.325-.991.991-1.267 2.402-1.325 3.678-.058 1.28-.07 1.688-.07 4.947s.012 3.667.07 4.947c.058 1.276.334 2.687 1.325 3.678.991.991 2.402 1.267 3.678 1.325 1.28.058 1.688.07 4.947.07s3.667-.012 4.947-.07c1.276-.058 2.687-.334 3.678-1.325.991-.991 1.267-2.402 1.325-3.678.058-1.28.07-1.688.07-4.947s-.012-3.667-.07-4.947c-.058-1.276-.334-2.687-1.325-3.678-.991-.991-2.402-1.267-3.678-1.325-1.266-.058-1.646-.07-4.947-.07zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm0 10.162a3.999 3.999 0 1 1 0-7.998 3.999 3.999 0 0 1 0 7.998zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
                 <span className="text-sm font-medium">Instagram</span>
               </a>
             </div>
@@ -1169,6 +1226,9 @@ const Cygnus: React.FC = () => {
           <div className="max-w-7xl mx-auto text-center">
             <p className="text-sm sm:text-base text-white/70 mb-4">
               &copy; {new Date().getFullYear()} IEEE CS SBC GHRCE. All rights reserved.
+            </p>
+            <p className="text-sm sm:text-base text-white/70">
+              Terms and conditions apply.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8">
               <a
