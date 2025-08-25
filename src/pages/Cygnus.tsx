@@ -190,8 +190,10 @@ const Cygnus: React.FC = () => {
                   </button>
                   <button
                     onClick={() => {
-                      setShowRegisterModal(false);
+                      // Open link first, then close modal
                       window.open('https://docs.google.com/forms/d/e/1FAIpQLSdQkCt6Y5xWZQ3BWE7o9ZdR4-0Dl7hKjhDU9qtQdz1BR0CNuw/viewform', '_blank');
+                      // Use requestAnimationFrame to ensure popup is triggered by user gesture
+                      requestAnimationFrame(() => setShowRegisterModal(false));
                     }}
                     className="bg-gradient-to-r from-yellow-600 to-yellow-800 text-black px-5 py-2 rounded-full font-semibold shadow hover:from-yellow-500 hover:to-yellow-700 hover:scale-105 transition-all duration-200"
                   >
@@ -455,10 +457,12 @@ const Cygnus: React.FC = () => {
               </motion.div>
 
               {(() => {
-                // Remove useSafeTap here, just use onClick for modal
+                const safeTap = useSafeTap(() => setShowRegisterModal(true));
                 return (
                   <motion.button
-                    onClick={() => setShowRegisterModal(true)}
+                    {...safeTap}
+                    whileTap={{ scale: 0.95 }}
+                    whileHover={{ scale: 1.05 }}
                     className="bg-gradient-to-r from-yellow-600 to-yellow-800 hover:from-yellow-500 hover:to-yellow-700 text-black font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-full border-2 border-yellow-400 shadow-lg transition-all duration-300 text-base sm:text-lg inline-flex items-center mx-4"
                   >
                     Register Now
