@@ -181,21 +181,31 @@ const Cygnus: React.FC = () => {
                   Please confirm that you wish to proceed to registration.<br />
                   <span className="block mt-2 text-yellow-300 font-semibold">Terms and conditions apply.</span>
                 </p>
-                <div className="flex justify-center gap-4">
+                <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 w-full">
                   <button
+                    onPointerDown={e => {
+                      // Only handle touch on mobile
+                      if (e.pointerType === 'touch') {
+                        setShowRegisterModal(false);
+                      }
+                    }}
                     onClick={() => setShowRegisterModal(false)}
-                    className="bg-black border border-yellow-400/40 text-yellow-300 px-5 py-2 rounded-full font-semibold shadow hover:bg-yellow-900/30 hover:text-yellow-200 transition-all duration-200"
+                    className="bg-black border border-yellow-400/40 text-yellow-300 px-5 py-2 rounded-full font-semibold shadow hover:bg-yellow-900/30 hover:text-yellow-200 transition-all duration-200 w-full sm:w-auto"
                   >
                     Cancel
                   </button>
                   <button
-                    onClick={() => {
-                      // Open link first, then close modal
-                      window.open('https://docs.google.com/forms/d/e/1FAIpQLSdQkCt6Y5xWZQ3BWE7o9ZdR4-0Dl7hKjhDU9qtQdz1BR0CNuw/viewform', '_blank');
-                      // Use requestAnimationFrame to ensure popup is triggered by user gesture
-                      requestAnimationFrame(() => setShowRegisterModal(false));
+                    onPointerDown={e => {
+                      if (e.pointerType === 'touch') {
+                        window.open('https://docs.google.com/forms/d/e/1FAIpQLSdQkCt6Y5xWZQ3BWE7o9ZdR4-0Dl7hKjhDU9qtQdz1BR0CNuw/viewform', '_blank');
+                        setShowRegisterModal(false);
+                      }
                     }}
-                    className="bg-gradient-to-r from-yellow-600 to-yellow-800 text-black px-5 py-2 rounded-full font-semibold shadow hover:from-yellow-500 hover:to-yellow-700 hover:scale-105 transition-all duration-200"
+                    onClick={e => {
+                      window.open('https://docs.google.com/forms/d/e/1FAIpQLSdQkCt6Y5xWZQ3BWE7o9ZdR4-0Dl7hKjhDU9qtQdz1BR0CNuw/viewform', '_blank');
+                      setShowRegisterModal(false);
+                    }}
+                    className="bg-gradient-to-r from-yellow-600 to-yellow-800 text-black px-5 py-2 rounded-full font-semibold shadow hover:from-yellow-500 hover:to-yellow-700 hover:scale-105 transition-all duration-200 w-full sm:w-auto"
                   >
                     Confirm
                   </button>
