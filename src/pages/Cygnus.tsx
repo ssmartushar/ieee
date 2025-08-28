@@ -6,26 +6,10 @@ const MagicBento = React.lazy(() => import('../components/MagicBento'));
 import LightsaberCursor from '../components/LightsaberCursor';
 import SEO from '../components/SEO';
 
-interface CygnusEvent {
-  id: string;
-  title: string;
-  description: string;
-  icon: React.ComponentType<any>;
-  date: string;
-  time: string;
-  duration: string;
-  maxParticipants: number;
-  currentParticipants: number;
-  prizes: string[];
-  requirements: string[];
-  registrationLink: string;
-  color: string;
-  iconColor: string;
-}
-
 const Cygnus: React.FC = () => {
   const [showPopup, setShowPopup] = useState(false);
-  const [showRegisterModal, setShowRegisterModal] = useState(false); // <-- Add modal state
+  const [showRegisterModal, setShowRegisterModal] = useState(false);
+  const [showTermsModal, setShowTermsModal] = useState(false); // New state for Terms and Conditions modal
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -152,6 +136,103 @@ const Cygnus: React.FC = () => {
     try { localStorage.setItem('cygnus_saber_thickness', String(saberThickness)); } catch { }
   }, [saberThickness]);
 
+  const TermsAndConditionsContent = () => (
+    <div>
+      <p className="mb-4">By registering and participating, you agree to the following terms and conditions:</p>
+
+      <h4 className="text-lg sm:text-xl font-semibold text-yellow-300 mb-2">Judging Criteria</h4>
+      <ul className="list-disc pl-5 mb-4 space-y-1">
+        <li><strong>Innovation</strong> – Originality and uniqueness of the idea.</li>
+        <li><strong>Technical Skills</strong> – How effectively the solution is designed and implemented.</li>
+        <li><strong>Impact</strong> – Practicality, scalability, and real-world relevance.</li>
+        <li><strong>Presentation</strong> – Clarity and confidence in explaining the project.</li>
+      </ul>
+      <p className="mb-4">The decision of the judges will be final and binding.</p>
+
+      <h4 className="text-lg sm:text-xl font-semibold text-yellow-300 mb-2">Code of Conduct</h4>
+      <ul className="list-disc pl-5 mb-4 space-y-1">
+        <li>Maintain respect and professionalism at all times.</li>
+        <li>Submissions must be original and free of plagiarism.</li>
+        <li>Harassment, discrimination, or misconduct will not be tolerated.</li>
+        <li>Compete fairly, collaborate honestly, and uphold team responsibility.</li>
+      </ul>
+      <p className="mb-4">With great code comes great responsibility</p>
+
+      <h4 className="text-lg sm:text-xl font-semibold text-yellow-300 mb-2">Disqualification</h4>
+      <ul className="list-disc pl-5 mb-4 space-y-1">
+        <li><strong>Plagiarism or Copied Work</strong> – Teams found submitting plagiarized, pre-built, or misrepresented projects will face immediate disqualification.</li>
+        <li><strong>Violation of Rules</strong> – Any breach of event guidelines or the Code of Conduct will not be tolerated and may result in removal.</li>
+        <li><strong>Unethical Behaviour</strong> – Misconduct, offensive actions, or disruptive activities by any member can lead to the disqualification of the entire team.</li>
+      </ul>
+
+      <h4 className="text-lg sm:text-xl font-semibold text-yellow-300 mb-2">Liability Disclaimer</h4>
+      <ul className="list-disc pl-5 mb-4 space-y-1">
+        <li><strong>Participation at your own risk</strong> – Teams are responsible for their own work, decisions, and use of resources during the event.</li>
+        <li><strong>Organizer's role</strong> – While we do our best to ensure a smooth experience, organizers cannot be held responsible for technical issues, data loss, or unexpected disruptions.</li>
+        <li><strong>Damages</strong> – Any personal, financial, or technical problems that may occur during participation remain the responsibility of the teams.</li>
+      </ul>
+
+      <h4 className="text-lg sm:text-xl font-semibold text-yellow-300 mb-2">Privacy Policy</h4>
+      <ul className="list-disc pl-5 mb-4 space-y-1">
+        <li><strong>Use of Information</strong> – The details you and your team provide during registration will only be used for event-related purposes.</li>
+        <li><strong>No Unnecessary Sharing</strong> – Your personal data will not be shared with third parties, except when required by law.</li>
+        <li><strong>Data Protection</strong> – We take care to keep your information safe and use it responsibly throughout the event.</li>
+      </ul>
+
+      <h4 className="text-lg sm:text-xl font-semibold text-yellow-300 mb-2">Amendments / Changes</h4>
+      <ul className="list-disc pl-5 mb-4 space-y-1">
+        <li>The organizers may update rules, schedules, or terms if required to ensure smooth conduct of the event.</li>
+        <li>Any changes will be clearly communicated through official CYGNUS 2025 channels.</li>
+        <li>Once announced, the updated guidelines will apply to all participating teams.</li>
+      </ul>
+
+      <h4 className="text-lg sm:text-xl font-semibold text-yellow-300 mb-2">Eligibility</h4>
+      <ul className="list-disc pl-5 mb-4 space-y-1">
+        <li>Open to all undergraduate and postgraduate students across any discipline.</li>
+        <li>Each participant must carry a valid college ID.</li>
+        <li>Teams of 2–4 members are allowed.</li>
+        <li>First-year students can participate in a special Ideathon category.</li>
+      </ul>
+
+      <h4 className="text-lg sm:text-xl font-semibold text-yellow-300 mb-2">Registration</h4>
+      <ul className="list-disc pl-5 mb-4 space-y-1">
+        <li>Early Bird Fee: ₹150 per person.</li>
+        <li>Registration is to be completed online via the official Cygnus portal.</li>
+        <li>Incomplete or late registrations will not be accepted.</li>
+        <li>Registration fees are non-refundable.</li>
+        <li>Each participant/team must provide accurate details; false information will lead to disqualification.</li>
+      </ul>
+
+      <h4 className="text-lg sm:text-xl font-semibold text-yellow-300 mb-2">Hackathon Rules</h4>
+      <ul className="list-disc pl-5 mb-4 space-y-1">
+        <li>Projects must be built during the hackathon only. Pre-built solutions are not allowed.</li>
+        <li>Plagiarism or copying code/designs without credit is strictly prohibited.</li>
+        <li>Teams must stick to the problem statements/themes provided by the organizers.</li>
+        <li>Final submissions must be made before the deadline; late entries will not be evaluated.</li>
+        <li>Participants must maintain discipline, fairness, and respect throughout the event.</li>
+      </ul>
+
+      <h4 className="text-lg sm:text-xl font-semibold text-yellow-300 mb-2">Terms & Conditions</h4>
+      <ul className="list-disc pl-5 mb-4 space-y-1">
+        <li>By registering, participants agree to abide by all event rules and organizer instructions.</li>
+        <li>Organizers reserve the right to make changes to the event schedule, rules, or prizes if required. Participants grant permission to use their name, photos, and project details for promotional purposes.</li>
+        <li>Any form of misconduct, cheating, or disruptive behavior will result in disqualification.</li>
+        <li>Prizes are non-transferable and cannot be redeemed for cash.</li>
+        <li>Organizers and sponsors are not responsible for any personal belongings or technical failures.</li>
+      </ul>
+
+      <h4 className="text-lg sm:text-xl font-semibold text-yellow-300 mb-2">Prizes & Recognition</h4>
+      <ul className="list-disc pl-5 space-y-1">
+        <li><strong>Hackathon Winners</strong> – Take home exciting prizes, exclusive goodies, and of course, the title of Cygnus 2025 Champions.</li>
+        <li><strong>Runners-up</strong> – Recognition, rewards, and appreciation for making it to the top.</li>
+        <li><strong>Special Awards</strong> – Categories like Best Innovation and Best Beginner Team will ensure unique talents don't go unnoticed.</li>
+        <li><strong>Ideathon Track (First-Year Students)</strong> – A separate award segment designed to celebrate the creativity of fresher.</li>
+        <li><strong>Certificates for All</strong> – Every participant will receive a certificate to recognize their effort, energy, and contribution.</li>
+        <li><strong>Swag</strong> – Participants can also look forward to exciting goodies, certificates, and event memorabilia as a token of appreciation.</li>
+      </ul>
+    </div>
+  );
+
   return (
     <>
       <SEO
@@ -179,7 +260,17 @@ const Cygnus: React.FC = () => {
                 <h3 className="text-xl sm:text-2xl font-bold text-yellow-400 mb-4">Register for Cygnus</h3>
                 <p className="text-white/80 mb-6 text-sm sm:text-base">
                   Please confirm that you wish to proceed to registration.<br />
-                  <span className="block mt-2 text-yellow-300 font-semibold">Terms and conditions apply.</span>
+                  <a
+                    href="#"
+                    onClick={(_e) => {
+                      _e.preventDefault();
+                      setShowRegisterModal(false); // Close register modal
+                      setShowTermsModal(true); // Open terms modal
+                    }}
+                    className="block mt-2 text-yellow-300 font-semibold hover:underline"
+                  >
+                    Terms and conditions apply.
+                  </a>
                 </p>
                 <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 w-full">
                   <button
@@ -209,6 +300,38 @@ const Cygnus: React.FC = () => {
                   >
                     Confirm
                   </button>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Terms and Conditions Modal */}
+        <AnimatePresence>
+          {showTermsModal && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-[2147483647] px-4 py-8"
+            >
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                className="bg-[#191919] border border-yellow-400/50 rounded-lg p-6 sm:p-8 text-left shadow-2xl max-w-2xl w-full max-h-[90vh] flex flex-col relative"
+                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+              >
+                <button
+                  onClick={() => setShowTermsModal(false)}
+                  className="absolute top-4 right-4 text-white/70 hover:text-white transition-colors z-10"
+                  aria-label="Close"
+                >
+                  <X className="w-6 h-6" />
+                </button>
+                <h3 className="text-xl sm:text-2xl font-bold text-yellow-400 mb-6 text-center flex-shrink-0">Terms and Conditions</h3>
+                <div className="text-white/80 text-sm sm:text-base space-y-4 overflow-y-auto flex-1 pr-2" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                  <TermsAndConditionsContent />
                 </div>
               </motion.div>
             </motion.div>
@@ -534,7 +657,7 @@ const Cygnus: React.FC = () => {
                   <h3 className="text-lg sm:text-2xl font-bold text-white leading-tight">What is Cygnus?</h3>
                 </div>
                 <p className="text-sm sm:text-base text-white/80 leading-relaxed">
-                  Cygnus is a premier 2-day hackathon where the brightest minds converge to build, innovate, and create solutions to real-world problems. Beyond a fest, it’s an intergalactic journey — hackathons, hands-on workshops, speaker sessions, competitions, and career tracks — where ideas shine like stars, teamwork is the force, and technology leads to new horizons.
+                  Cygnus is a premier 2-day hackathon where the brightest minds converge to build, innovate, and create solutions to real-world problems. Beyond a fest, it's an intergalactic journey — hackathons, hands-on workshops, speaker sessions, competitions, and career tracks — where ideas shine like stars, teamwork is the force, and technology leads to new horizons.
                 </p>
               </motion.div>
 
@@ -1170,7 +1293,7 @@ const Cygnus: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
                 viewport={{ once: true }}
-                className="text-center group p-4 sm:p-6 bg-black/20 rounded-xl sm:bg-transparent sm:p-0"
+                className="text-center group p-4 bg-black/20 rounded-xl sm:bg-transparent sm:p-0"
               >
                 <div className="relative mb-4">
                   <MapPin className="w-10 h-10 sm:w-12 sm:h-12 text-yellow-400 mx-auto mb-3 sm:mb-4" />
@@ -1188,7 +1311,7 @@ const Cygnus: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
                 viewport={{ once: true }}
-                className="text-center group p-4 sm:p-6 bg-black/20 rounded-xl sm:bg-transparent sm:p-0"
+                className="text-center group p-4 bg-black/20 rounded-xl sm:bg-transparent sm:p-0"
               >
                 <div className="relative mb-4">
                   <Users className="w-10 h-10 sm:w-12 sm:h-12 text-yellow-400 mx-auto mb-3 sm:mb-4" />
@@ -1206,7 +1329,7 @@ const Cygnus: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
                 viewport={{ once: true }}
-                className="text-center group p-4 sm:p-6 bg-black/20 rounded-xl sm:bg-transparent sm:p-0 sm:col-span-2 lg:col-span-1"
+                className="text-center group p-4 bg-black/20 rounded-xl sm:bg-transparent sm:p-0 sm:col-span-2 lg:col-span-1"
               >
                 <div className="relative mb-4">
                   <Trophy className="w-10 h-10 sm:w-12 sm:h-12 text-yellow-400 mx-auto mb-3 sm:mb-4" />
@@ -1228,7 +1351,16 @@ const Cygnus: React.FC = () => {
               &copy; {new Date().getFullYear()} IEEE CS SBC GHRCE. All rights reserved.
             </p>
             <p className="text-sm sm:text-base text-white/70">
-              Terms and conditions apply.
+              <a
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setShowTermsModal(true);
+                }}
+                className="text-yellow-300 hover:text-yellow-200 hover:underline cursor-pointer transition-colors"
+              >
+                Terms and conditions apply.
+              </a>
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8">
               <a
