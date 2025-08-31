@@ -307,15 +307,15 @@ const Cygnus: React.FC = () => {
                 <div className="p-2 sm:p-3 bg-yellow-500/40 rounded-full mr-3 sm:mr-4 flex-shrink-0">
                   <Code className="w-6 h-6 sm:w-8 sm:h-8 text-yellow-400" />
                 </div>
-                <h3 className="text-lg sm:text-2xl font-bold text-white leading-tight">24-Hour Hackathon</h3>
+                <h3 className="text-lg sm:text-2xl font-bold text-white leading-tight">6-Hour Hackathon</h3>
               </div>
               <p className="text-white/90 text-sm sm:text-lg leading-relaxed flex-1">
-                Immerse yourself in an intensive 24-hour coding marathon where innovation meets execution. 
+                Immerse yourself in an intensive 6-hour coding marathon where innovation meets execution. 
                 Build groundbreaking solutions that could change the world.
               </p>
               <div className="mt-4 sm:mt-6 flex items-center text-yellow-400 flex-shrink-0">
                 <Clock className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
-                <span className="text-xs sm:text-sm">24 Hours of Pure Innovation</span>
+                <span className="text-xs sm:text-sm">6 Hours of Pure Innovation</span>
               </div>
             </motion.div>
             
@@ -330,10 +330,10 @@ const Cygnus: React.FC = () => {
                 <div className="p-2 sm:p-3 bg-blue-500 rounded-full mr-3 sm:mr-4 flex-shrink-0">
                   <Trophy className="w-6 h-6 sm:w-8 sm:h-8 text-blue-900" />
                 </div>
-                <h3 className="text-lg sm:text-2xl font-bold text-white leading-tight">₹10,000+ Prize Pool</h3>
+                <h3 className="text-lg sm:text-2xl font-bold text-white leading-tight">₹25,000+ Prize Pool</h3>
               </div>
               <p className="text-white text-sm sm:text-lg leading-relaxed flex-1">
-                Compete for an impressive prize pool worth over ₹10,000. 
+                Compete for an impressive prize pool worth over ₹25,000. 
                 Your innovative ideas could earn you recognition and rewards.
               </p>
               <div className="mt-4 sm:mt-6 flex items-center text-blue-200 flex-shrink-0">
@@ -376,15 +376,15 @@ const Cygnus: React.FC = () => {
                 <div className="p-2 sm:p-3 bg-green-500 rounded-full mr-3 sm:mr-4 flex-shrink-0">
                   <Zap className="w-6 h-6 sm:w-8 sm:h-8 text-green-900" />
                 </div>
-                <h3 className="text-lg sm:text-2xl font-bold text-white leading-tight">Expert Mentorship</h3>
+                <h3 className="text-lg sm:text-2xl font-bold text-white leading-tight">Learn, Compete & Build</h3>
               </div>
               <p className="text-white text-sm sm:text-lg leading-relaxed flex-1">
-                Get guidance from industry experts and seasoned professionals. 
-                Learn cutting-edge technologies and best practices.
+                Guidance from industry experts with exciting quizzes and a workshop on Agentic AI — blending mentorship with interactive learning. 
+                
               </p>
               <div className="mt-4 sm:mt-6 flex items-center text-green-200 flex-shrink-0">
                 <Gamepad2 className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
-                <span className="text-xs sm:text-sm">Hands-on Workshops & Sessions</span>
+                <span className="text-xs sm:text-sm">Mentorship, Quizzes & Workshops</span>
               </div>
             </motion.div>
           </div>
