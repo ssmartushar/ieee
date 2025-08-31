@@ -29,7 +29,7 @@ const Cygnus: React.FC = () => {
   });
 
   // Event date - set to a future date
-  const eventDate = new Date('2025-09-1T09:00:00');
+  const eventDate = new Date('2025-09-19T09:00:00');
 
   useEffect(() => {
     const timer = setInterval(() => {
