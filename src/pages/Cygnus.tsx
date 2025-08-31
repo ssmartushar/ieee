@@ -18,7 +18,7 @@ const Cygnus: React.FC = () => {
   });
 
   // Event date - set to a future date
-  const eventDate = new Date('2025-09-12T09:00:00');
+  const eventDate = new Date('2025-09-19T09:00:00');
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -575,15 +575,11 @@ const Cygnus: React.FC = () => {
                 <div className="inline-block border border-w rounded-2xl p-4 sm:p-6 backdrop-blur-sm">
                   <div className="text-center">
                     <div className="flex items-center justify-center mb-2">
-                      <Zap className="w-5 h-5 sm:w-6 sm:h-6 text-white mr-2 animate-pulse" />
-                      <span className="text-white font-bold text-sm sm:text-base uppercase tracking-wide">Early Bird Special</span>
+                      <Star className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-400 mr-2" />
+                    <span className="text-white font-bold text-sm sm:text-base uppercase tracking-wide">Registration Fee</span>
                     </div>
                     <p className="text-2xl sm:text-3xl font-bold text-white mb-1">
-                      <span className="text-white line-through text-lg sm:text-xl mr-2">₹200</span>
-                      <span className="text-yellow-400">₹150</span>
-                    </p>
-                    <p className="text-xs sm:text-sm text-white/70">
-                      Save 25% • For First 100 participants
+                      <span className="text-yellow-400">₹200</span>
                     </p>
                   </div>
                 </div>
