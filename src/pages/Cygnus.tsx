@@ -581,6 +581,7 @@ const Cygnus: React.FC = () => {
                     <p className="text-2xl sm:text-3xl font-bold text-white mb-1">
                       <span className="text-yellow-400">₹200</span>
                     </p>
+                    <p className="text-gray-400 text-sm">per person</p>
                   </div>
                 </div>
               </motion.div>
