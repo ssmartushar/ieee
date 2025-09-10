@@ -890,6 +890,41 @@ const Cygnus: React.FC = () => {
           </div>
         </section>
 
+        {/* Sponsors Section */}
+        <section className="relative z-10 py-12 sm:py-20 px-4 sm:px-6">
+          <div className="max-w-7xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="text-center mb-8 sm:mb-12"
+            >
+              <h2 className="text-2xl sm:text-4xl font-bold text-white mb-4 sm:mb-6">
+                Our Galactic Sponsors
+              </h2>
+              <p className="text-base sm:text-lg text-white/70 max-w-3xl mx-auto mb-8 sm:mb-10">
+                Proudly supported by leading organizations who believe in empowering the next generation of developers.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="flex justify-center"
+            >
+              <div className="bg-gradient-to-br from-white/10 to-white/5 border border-white/20 rounded-3xl p-8 sm:p-12 backdrop-blur-sm hover:border-yellow-400/30 transition-all duration-300">
+                <img
+                  src="/assets/Codestarters2.png"
+                  alt="Codecrafters.png"
+                  className="h-12 sm:h-16 mx-auto hover:opacity-100 transition-opacity duration-300"
+                />
+              </div>
+            </motion.div>
+          </div>
+        </section>
         {/* Community Partners Section */}
         <section className="relative z-10 py-12 sm:py-20 px-4 sm:px-6 bg-gradient-to-br from-purple-900/20 to-black/50">
           <div className="max-w-7xl mx-auto">
